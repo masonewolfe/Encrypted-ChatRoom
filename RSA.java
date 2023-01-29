@@ -1,4 +1,8 @@
 import javax.crypto.Cipher;
+import javax.swing.plaf.synth.SynthTextAreaUI;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.math.BigInteger;
 import java.nio.charset.StandardCharsets;
 import java.util.Random;
@@ -15,24 +19,48 @@ public class RSA {
             y = z;
         }
 
+        /** Getter for the X prime Value
+         *
+         * @return
+         */
+        public int getX()
+        {
+            return X;
+        }
 
+        /** Getter for the Y Prime Value
+         *
+         * @return
+         */
+        public int getY()
+        {
+            return y;
+        }
+
+        @Override
+        public String toString() {
+            return "Key{" +
+                    "X=" + X +
+                    ", y=" + y +
+                    '}';
+        }
     }
 
     /** This Method is used to Generate a Private Key based on the previously produced Public key
      *
-     * @param e PublicKey's e value
-     * @param n PublicKey's n value
+     * @param  PublicKey's e value
+     * @param  PublicKey's n value
      * @param SecondPart the Sigma value found from the PublicKey's p and q values
      * @return A PrivateKey with the PublicKey's e and resulting d values
      */
-    public Key GeneratePrivateKey(int e, int n, int SecondPart)
+    public Key GeneratePrivateKey(Key PublicKey, int SecondPart)
     {
         int d;
         for (int i = 0; i < SecondPart;i++)
         {
-            if((i * e)%SecondPart == 1) {
+            if((i * PublicKey.y)%SecondPart == 1) {
                 d = i;
-                return new Key(n,d);
+                return new Key(PublicKey.X,d);
             }
         }
         return null;
@@ -105,27 +133,26 @@ public class RSA {
      */
     public BigInteger Encrpyt (String Message, int e, int n)
     {
+            BigInteger En = BigInteger.valueOf(Integer.parseInt(Message));
+            BigInteger result = En.pow(e);
+            result = result.mod(BigInteger.valueOf(n));
 
-        BigInteger En = BigInteger.valueOf(Integer.parseInt(Message));
-        BigInteger result = En.pow(e);
-        result = result.mod(BigInteger.valueOf(n));
         return result;
     }
 
     /** Decyprtion Method used to decrypt a string, Requires a Number produced from the encyrption
      *
      * @param En Number, in this case a Biginteger used to decyrpt
-     * @param d Private Key's d value
-     * @param n Universal Key n value which should match
+     * @param PrivateKey Private Used to Decrypt
      * @return For Now, Identical Numbers to the Encryption method.
      */
-    public String Decrypt(BigInteger En,int d,int n)
+    public String Decrypt(BigInteger En,Key PrivateKey)
     {
         String Message ="";
         // Problem Here with Rounding
-        BigInteger M = En.pow(d);
-        M = M.mod(BigInteger.valueOf(n));
-        Message += M;
+        BigInteger M = En.pow(PrivateKey.y);
+        M = M.mod(BigInteger.valueOf(PrivateKey.X));
+        Message+= M;
         return Message;
     }
 
@@ -133,15 +160,17 @@ public class RSA {
     {
         RSA Test = new RSA();
         Key PublicKey = Test.GeneratePublicKey(73,97);
+
+
         int SecondPart = (73 - 1)*(97 -1);
 
-        Key PrivateKey = Test.GeneratePrivateKey(PublicKey.y, PublicKey.X,SecondPart );
+        Key PrivateKey = Test.GeneratePrivateKey(PublicKey,SecondPart);
         System.out.print("n = " + PublicKey.X + "\tz = " + PublicKey.y);
         System.out.print("\nn = " + PrivateKey.X + "\td = " + PrivateKey.y);
         String Message = "23";
         BigInteger EncyrptionNumber = Test.Encrpyt(Message, PublicKey.y, PublicKey.X);
         System.out.println("\nEncrypted Number = " + EncyrptionNumber);
-        System.out.println("Decrypted Number = " + Test.Decrypt(EncyrptionNumber, PrivateKey.y, PrivateKey.X));
+        System.out.println("Decrypted Number = " + Test.Decrypt(EncyrptionNumber,PrivateKey));
 
 
 
