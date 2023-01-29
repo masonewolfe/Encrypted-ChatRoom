@@ -1,12 +1,7 @@
-import javax.crypto.Cipher;
-import javax.swing.plaf.synth.SynthTextAreaUI;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.ObjectOutputStream;
 import java.math.BigInteger;
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
 import java.util.Random;
-import java.util.Base64;
 
 public class RSA {
 
@@ -79,12 +74,12 @@ public class RSA {
         int SecondPart = (FirstPrime - 1)*(SecondPrime -1);
         Random Random = new Random();
 
-            while(true){
-                int e = Random.nextInt(SecondPart);
-                if (FindPrime(e)) {
-                    return new Key(FirstPart,e );
-                }
+        while(true){
+            int e = Random.nextInt(SecondPart);
+            if (FindPrime(e)) {
+                return new Key(FirstPart,e );
             }
+        }
 
     }
 
@@ -116,12 +111,12 @@ public class RSA {
 
     public int GCD(int n1, int n2)
     {
-      if (n1 ==0)
-      {
-          return n2;
-      }
-      else
-        return GCD(n2 % n1,n1);
+        if (n1 ==0)
+        {
+            return n2;
+        }
+        else
+            return GCD(n2 % n1,n1);
     }
 
     /** Encryption Method used to Encrypt a String, For now we use UNICODE method to get a Number. One that number is produced
@@ -131,29 +126,36 @@ public class RSA {
      * @param n The n value both keys should produce and be the same
      * @return a Number for Now
      */
-    public BigInteger Encrpyt (String Message, int e, int n)
+    public ArrayList<BigInteger> Encrpyt (String Message, int e, int n)
     {
-            BigInteger En = BigInteger.valueOf(Integer.parseInt(Message));
-            BigInteger result = En.pow(e);
-            result = result.mod(BigInteger.valueOf(n));
+        byte [] M = Message.getBytes(StandardCharsets.US_ASCII);
 
-        return result;
+
+        ArrayList<BigInteger> en = new ArrayList<>();
+        for(byte c: M)
+        {
+            en.add(new BigInteger(String.valueOf(c)).modPow(BigInteger.valueOf(e),BigInteger.valueOf(n)));
+        }
+        System.out.print(en);
+        return en;
     }
 
     /** Decyprtion Method used to decrypt a string, Requires a Number produced from the encyrption
      *
-     * @param En Number, in this case a Biginteger used to decyrpt
+     * @param Enc Number, in this case a Biginteger used to decyrpt
      * @param PrivateKey Private Used to Decrypt
      * @return For Now, Identical Numbers to the Encryption method.
      */
-    public String Decrypt(BigInteger En,Key PrivateKey)
+    public String Decrypt(ArrayList<BigInteger> Enc,Key PrivateKey)
     {
-        String Message ="";
+        StringBuilder Message = new StringBuilder();
         // Problem Here with Rounding
-        BigInteger M = En.pow(PrivateKey.y);
-        M = M.mod(BigInteger.valueOf(PrivateKey.X));
-        Message+= M;
-        return Message;
+        for(BigInteger big : Enc)
+        {
+            Message.append((char) Integer.parseInt(big.modPow(BigInteger.valueOf(PrivateKey.y),BigInteger.valueOf(PrivateKey.X)).toString()));
+        }
+
+        return Message.toString();
     }
 
     public static void main(String [] args)
@@ -167,8 +169,8 @@ public class RSA {
         Key PrivateKey = Test.GeneratePrivateKey(PublicKey,SecondPart);
         System.out.print("n = " + PublicKey.X + "\tz = " + PublicKey.y);
         System.out.print("\nn = " + PrivateKey.X + "\td = " + PrivateKey.y);
-        String Message = "23";
-        BigInteger EncyrptionNumber = Test.Encrpyt(Message, PublicKey.y, PublicKey.X);
+        String Message = "Jay";
+        ArrayList<BigInteger> EncyrptionNumber = Test.Encrpyt(Message, PublicKey.y, PublicKey.X);
         System.out.println("\nEncrypted Number = " + EncyrptionNumber);
         System.out.println("Decrypted Number = " + Test.Decrypt(EncyrptionNumber,PrivateKey));
 
