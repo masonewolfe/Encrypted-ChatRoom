@@ -1,3 +1,0 @@
-folder for all web application development,
-
-will be a node-react client project
