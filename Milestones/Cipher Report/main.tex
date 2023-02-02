@@ -1,9 +1,6 @@
 \documentclass[11pt]{article}
 
 \usepackage[pages=all, color=black, position={current page.south}, placement=bottom, scale=1, opacity=1, vshift=5mm]{background}
-\SetBgContents{
-	\tt This work is shared under a \href{https://creativecommons.org/licenses/by-sa/4.0/}{CC BY-SA 4.0 license} unless otherwise noted
-}      % copyright
 
 \usepackage[margin=1in]{geometry} % full-width
 
@@ -28,9 +25,6 @@
 	pdfproducer={LaTeX},
 	pdfcreator={pdflatex}
 }
-
-% Vietnamese
-%\usepackage{vntex}
 
 % Natbib
 \usepackage[sort&compress,numbers,square]{natbib}
@@ -72,8 +66,8 @@
 }
 
 \begin{document}
-\title{Cipher Secure Non-persistent Instant Messaging}
-\author{Joey Saline, Sydney Pennington, Mason Wolfe, Jordan Rivera, Dylan Moran}
+\title{Secure Non-persistent Instant Messaging}
+\author{Dylan Moran, Sydney Pennington, Jordan Rivera, Joey Saline, Mason Wolfe}
 \maketitle
 	
 \begin{abstract}
@@ -85,20 +79,16 @@ Please fill out abstract
 % % 	\tableofcontents
 
 \section{Introduction}\label{sec:intro}
-These days, it is easy to find a capstone project \cite{Atrey2021BrickHouseSecuity}. It is not 
-easy to find a capstone project 
-
-This is second para in introduction section....
+The problem we are trying to solve is building a secure, non-persistent, instant messaging application. The foundation behind this app
 
 \subsection{Importance}\label{sec:importance}
-This is a subsection containing preliminaries.
+The most valuable asset to have is a user’s data because of the identity it forms. Security is an important factor in instant messaging applications because it prevents access to the User’s information. User information can be logged on a server with their emails, passwords, and location. A compromised server can give access to all this information. Debatably the most important information may come from the chat logs/history where information is sent through various media forms such as images, videos, links, and text that could be personal and sensitive information relating to the user. Having a non-persistent chat implementation ensures the user’s privacy is respected by the administrators and protected from unwanted eyes.
 
 \subsection{Challenges}\label{sec:challenges}
-This is a subsection containing notations.
+The intended use can pose an ethical issue. A secure encrypted messaging application where chat logs are not stored can pose an ethical issue. Some users can use this to protect themselves from tyrannical governments, blackmail, hackers, or third-party ad targeting. However, this can also be used for malicious purposes where it can serve as a hub for criminals to avoid government or law enforcement from viewing their messages and monitoring their ploys.
 
 \subsection{Attempts}\label{sec:attempts}
-This is a subsection containing notations.
-
+Existing solutions to this problem would be What's App, Signal, Grindr, and Zoom. Each of which has some aspects of security.
 \subsubsection{Shortcomings}\label{sec:shortcomings}
 This is a subsection containing notations.
 
@@ -112,6 +102,12 @@ This is a subsection containing preliminaries.
 This is a subsection containing notations.
 
 \subsection{Non-function Requirements}\label{sec:nonfuncrequirements}
+This is a subsection containing notations.
+
+\subsection{Operational Requirements}\label{sec:operationalrequirements}
+This is a subsection containing notations.
+
+\subsection{Design and Implementation}\label{sec:designandimplementationrequirements}
 This is a subsection containing notations.
 
 \end{document}
