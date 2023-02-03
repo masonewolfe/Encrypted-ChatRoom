@@ -12,13 +12,15 @@ class XMPPController: NSObject, XMPPStreamDelegate{
     
 //############################################################################################################################//
     
+    //Allows for global use of the XMPP Controller throughout the projects views
     static let shared = XMPPController()
+    private override init(){}
     
     var xmppStream = XMPPStream()
     let hostName = "52.188.65.46"
     let hostPort = 5222
-    var userJID = "dylan@selfdestructim.com"
-    var password = "password"
+    var userJID = ""
+    var password = ""
     
 //############################################################################################################################//
     

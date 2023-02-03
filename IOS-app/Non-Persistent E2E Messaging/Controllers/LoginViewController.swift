@@ -156,6 +156,9 @@ class LoginViewController: UIViewController {
         }
         
         //XMPP Login
+        XMPPController.shared.userJID = email
+        XMPPController.shared.password = password
+        XMPPController.shared.connect()
         
     }
     
