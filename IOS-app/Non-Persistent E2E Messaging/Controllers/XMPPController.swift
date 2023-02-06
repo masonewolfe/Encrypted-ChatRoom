@@ -32,6 +32,7 @@ class XMPPController: NSObject, XMPPStreamDelegate{
         xmppStream.hostPort = UInt16(hostPort)
         xmppStream.myJID = XMPPJID(string: userJID)
         
+        xmppStream.removeDelegate(self, delegateQueue: DispatchQueue.main)
         xmppStream.addDelegate(self, delegateQueue: DispatchQueue.main)
         
         // Connect to the XMPP server
@@ -46,12 +47,32 @@ class XMPPController: NSObject, XMPPStreamDelegate{
     }
     
 //############################################################################################################################//
+    
+    func disconnectStream() {
+        if xmppStream.isConnected {
+            xmppStream.disconnect()
+            print("Disconnecting from XMPP Server...")
+        }
+    }
+    
+//############################################################################################################################//
+    
+    func xmppStreamDidDisconnect(_ sender: XMPPStream, withError error: Error?) {
+        print("Disconnected from XMPP Server")
+    }
+    
+//############################################################################################################################//
 
     //Function to start authentication after connecting
     
     func xmppStreamDidConnect(_ sender: XMPPStream) {
-        print("Connected to XMPP server")
-        authenticate()
+        if xmppStream.isAuthenticating{
+            print("Attempted to authenticate twice.")
+        }
+        else{
+            print("Connected to XMPP server")
+            authenticate()
+        }
     }
     
 //############################################################################################################################//
@@ -79,11 +100,6 @@ class XMPPController: NSObject, XMPPStreamDelegate{
         // Send presence to the server to indicate that the user is online
         let presence = XMPPPresence()
         self.xmppStream.send(presence)
-        
-        //Testing for Message Sending
-        let messageElement = XMPPMessage(type: "chat", to: XMPPJID(string: "mason@selfdestructim.com"))
-        messageElement.addBody("Hello this is a test.")
-        // self.xmppStream.send(messageElement)
     }
     
 //############################################################################################################################//
@@ -98,8 +114,8 @@ class XMPPController: NSObject, XMPPStreamDelegate{
     
     //Funtion to send a message
     
-    func sendMessage(message: String) {
-        let messageElement = XMPPMessage(type: "chat", to: XMPPJID(string: "mason@selfdestructim.com"))
+    func sendMessage(message: String, recipient: String) {
+        let messageElement = XMPPMessage(type: "chat", to: XMPPJID(string: recipient))
         messageElement.addBody(message)
         self.xmppStream.send(messageElement)
         print("Sent")
