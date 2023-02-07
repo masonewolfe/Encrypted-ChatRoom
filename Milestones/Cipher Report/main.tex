@@ -72,7 +72,7 @@
 \maketitle
 	
 \begin{abstract}
-This report dictates the process of how our team planned and developed a secure non-persistent instant messaging application. We will describe our thoughts from beginning to end and how we solved the problem we were tasked with, including what we learned, why it was significant, the specifics of our application, the technologies used, and where we fell short.
+Please fill out abstract
 		
 % %		\noindent\textbf{Keywords:} article, template, simple
 \end{abstract}
@@ -80,10 +80,10 @@ This report dictates the process of how our team planned and developed a secure 
 % % 	\tableofcontents
 
 \section{Introduction}\label{sec:intro}
-As technologies continue to advance at a rapid pace and communications are taking place almost entirely online; what steps can be taken to ensure personal privacy? It is becoming increasingly visible that the personal information you put online is not safe from prying eyes. In the wake of massive hacking scandals, governmental spying, and corporate data collection, we as individuals must evolve and develop technologies that preserve our right to privacy. We aim to develop a secure non persistent messaging application that incorporates end-to-end encryption.
+As technologies continue to advance at a rapid pace and communications are taking place almost entirely online; what steps can be taken to ensure personal privacy? It is becoming increasingly visible that the personal information you put online is not safe from prying eyes. In the wake of massive hacking scandals, governmental spying, and corporate data collection, we as individuals must evolve and develop technologies that preserves our right to privacy. We aim to develop a secure non persistent messaging applications that incorporates end-to-end encryption.
 
 \subsection{Importance}\label{sec:importance}
-The most valuable asset to have is a user’s data because of the identity it forms. Security is an important factor in instant messaging applications because it prevents access to the user’s information. User information is often logged on a server with their emails, passwords, contacts, messages, and IP addresses stored. A compromised server can give access to all this information. Debatably the most important information may come from the chat logs and contact history where information is sent through various media forms such as images, videos, links, and text that could be personal and sensitive information relating to the user. Having a non-persistent chat implementation ensures the user’s privacy is respected by the administrators and protected from unwanted eyes.
+The most valuable asset to have is a user’s data because of the identity it forms. Security is an important factor in instant messaging applications because it prevents access to the user’s information. User information is often logged on a server with their emails, passwords, contacts, messages, and IP addresses are stored. A compromised server can give access to all this information. Debatably the most important information may come from the chat logs and contact history where information is sent through various media forms such as images, videos, links, and text that could be personal and sensitive information relating to the user. Having a non-persistent chat implementation ensures the user’s privacy is respected by the administrators and protected from unwanted eyes.
 
 \subsection{Challenges}\label{sec:challenges}
 The intended use can pose an ethical issue. A secure encrypted messaging application where chat logs are not stored can pose an ethical issue. Some users can use this to protect themselves from tyrannical governments, blackmail, hackers, or third-party ad targeting. However, this can also be used for malicious purposes where it can serve as a hub for criminals to avoid government or law enforcement from viewing their messages and monitoring their ploys.
@@ -113,58 +113,116 @@ There are several existing applications that seek to solve this problem. However
 \end{tabular} 
 }
 
-\section{System Specifications}\label{sec:sysspecs}
-\subsection{User Classes}\label{sec:userclasses}
+\section{User Classes}\label{sec:userclasses}
 
-\subsubsection{Room Administrator}
+\subsection{Room Administrator}
 This class of user refers to a user who created a chatroom. Being in this user class would allow a person full control over the chatroom they created. They should be allowed to kick users, invite users, assign roles, set chatroom permissions, and destroy the chatroom. This user class also includes all aspects of the general user class. 
-\subsubsection{Room Member}
-This class of users refers to a user who was invited or joined a chatroom. This user class would be allowed the bare minimum amount of control granted by the chatroom administrator. They could send messages, and potentially invite other users if the admin allows it. They are also susceptible to being kicked or blocked from the chatroom. They can however be assigned a role that allows them a higher level of control by the room administrator.  This user class also includes all aspects of the general user class. 
-\subsubsection{General Users}
-This class of users refers to all other users that exist outside of chat rooms. General users should be allowed to add friends, block users, see their friend's statuses, create chat rooms, and send direct messages to their friends.
+\subsection{Room Member}
+This class of user refers to a user who was invited or joined a chatroom. This user class would be allowed the bare minimum amount of control granted by the chatroom administrator. They could send messages, and potentially invite other users if the admin allows it. They are also susceptible to being kicked or blocked from the chatroom. They can however be assigned a role that allows them a higher level of control by the room administrator.  This user class also includes all aspects of the general user class. 
+\subsection{General Users}
+This class of user refers to all other users that exist outside of chat rooms. General users should be allowed to add friends, block users, see their friend's statuses, create chat rooms and send direct messages to their friends.
 
-\subsection{Functional Requirements}\label{sec:funcrequirements}
-All functional requirements only exist in the scope of the user's own account.
-\subsubsection{Register User Account}
+\section{Functional Requirements}\label{sec:funcrequirements}
+All functional requirements only exist in the scope of the User's own account
+\subsecction{Encrypt User Messages}
+The messages will need to be encrypted from end to end using a popular encryption algorithm
+\subsection{Non-Persistance}
+A users message history should be deleted from the server after receiving a message. After the user closes the application, the message should also be erased from the client's device.
+\subsection{Register User Account}
 Users will create an account with a username, password, and email. If the username is taken, or there is already an account registered to the email, the user will be notified and the account not created
-\subsubsection{Change Password}
-In the event of a compromised account or a user forgetting their password, the user should be able to reset their password via email.
-\subsubsection{Deregister Account}
+\subsection{Change Password}
+In the event of a compromised account or a user forgets his/her password, the user should be able to reset their password via their email.
+\subsection{Unregister Account}
 If a user wants to delete their account, they will be able to do so by following a series of steps available on the app. A user can only delete the account they are logged in on.
-\subsubsection{Set User Presence}
-Users will be able to choose whether they want their online status shown to their friends or not. Their online status will be shown by default.
-\subsubsection{Edit User Profile}
-Users can edit their profile with an uploaded picture, and a summary of themselves.
-\subsubsection{Manage Friend List}
-A user should be allowed to add and remove friends.
-\subsubsection{View Friends Statuses}
-A user should be allowed to see what friends are actively using the app via their online status unless they have disabled show online status.
-\subsubsection{Manage Blocked Users}
+\subsection{Set User Presence}
+A user will be able to choose whether they want their presence shown to their friends or not. Their presence will be shown by default.
+\subsection{Edit User Profile}
+A user can edit their profile with an uploaded picture, and a summary about themselves
+\subsection{Manage Friend List}
+A user should be allowed to add and remove friends
+\subsection{View Friends Statuses}
+A user should be allowed to see what friends are actively using the app via their statuses; if their friends haven't disabled status viewing. 
+\subsection{Manage Blocked Users}
 A user should be able to block another user from messaging them, inviting them to chat rooms, and requesting them as a friend. All blocked users will be stored in a blocked users list for easy management and potential unblocking. 
-\subsubsection{Create Chat Room}
-A user should be able to create a chatroom. This user will automatically be the administrator of the chatroom and have the highest level of permissions within the context of the chatroom.
-\subsubsection{Administrate Chatroom}
-A user who has the proper permissions (admin) should be able to kick users and set the chatroom to invite only, closed, or open to join. The admin of a chatroom should also be allowed to grant users a higher level of access, such as allowing them to invite their friends or making them an admin as well.
+\subsection{Create Chat Room}
+A user should be able to create a chatroom. This user will automatically be the administrator of the chatroom, and have the highest level of permissions within the context of the chatroom.
+\subsection{Administrate Chatroom}
+A user who has the proper permissions (Admin) should be able to kick users, set the chatroom to invite only, closed, or open to join. The Admin of the chatroom should also be allowed to grant users higher level of access, such as allowing them to invite their friends or making them an administrator as well.
 
-\subsection{Non-functional Requirements}\label{sec:nonfuncrequirements}
-\subsubsection{Performance}
-A user should be able to register an account within 30 seconds given a valid username, password, and email. Any message sent to the server whether it be an API request or an XML stanza should reach the server within a second from the push of a button. Given an active client-side device, any messages sent to the said user should reach them within ten seconds.
-\subsubsection{Reliability}
-No messages will be lost in transit given an active Wifi connection. The server should always be running, excluding needed maintenance. All web requests submitted will be executed within 5 seconds given the right credentials.
-\subsubsection{Security}
-All messages sent should be encrypted with the recipient's public key and then decrypted via the recipient's private key upon arrival at the recipient's device. There should be limited access to the back end of the messaging application. This includes most ports being closed, excluding the one receiving XML stanzas and handling HTTP requests. All requests will be handled via an API and/or a Web Server. Users must authenticate themselves via a Username and Password to enable requests related to that account. All users only have control over the scope of their accounts. Users have a limited amount of requests available to them. Upon retrieval of a user's messages to their client-side device, a request will be sent to the server to erase all messages just received. Upon closing of the application, those messages will also be erased from the client device.
-\subsubsection{Availability}
-The application should have a publicly available website that  anyone with Internet access can utilize around the globe. Registration should take no longer than 5 minutes and should not require more information than the bare minimum necessary to make secure messaging possible. The server should be active at least 360 days a year including maintenance.
-\subsubsection{Usability}
-The GUI should be straightforward and not overwhelming or confusing. A user should not have to explore the application in depth in order to quickly begin using it.
-\subsubsection{Scalability}
-The database and server will be easily upgradable with Processing Power, RAM, and SSD in order to support a growing user base. 
+\section{Non-functional Requirements}\label{sec:nonfuncrequirements}
+\subsection{Performance}
+- A user should be able to register an account within 30 seconds given a valid username, 
+  password, and email
+\newline
+- Any message sent to the server whether it be an API request or an XML stanza should reach 
+  the server within a second from the push of a button.
+\newline
+- Given an active client side device, any messages sent to said user should reach them 
+  within ten seconds.
+\subsection{Reliability}
+- No messages will be lost in transit given an active WiFi connection
+  \newline
+- The server should always be running, excluding needed maintenance
+  \newline
+- All web requests submitted will be executed within 5 seconds given the right 
+  credentials
+    \newline
+- Message receival rate greater than 99% \newline
+- Messages are sent instantaneously and presented correctly
+- Messages are Non-persistent on the Client and Server side
+- Application can handle multiple clients at within an allotted time period
+- Application can handle message traffic precisely
 
-\subsection{Operational Requirements}\label{sec:operationalrequirements}
-A machine running the Ubuntu Linux 22.04 operating system. Ejabberd running within the daemon of said machine and listening on specified ports. Ejabberd comes with an internal database that stores user information such as usernames, passwords, and messages. Ejabberd will use a REST API for HTTP requests. An external MySQL database that stores important user information such as public keys used for encryption. An iOS Application coded in Swift and an Android Application coded in Java. Libraries within these applications that support XML stanza transfer and HTTP requests. Data structures that support efficient use of memory and processing power.
+\subsection{Security}
+- All messages sent should be encrypted with the recipients public key and then decrypted 
+  via the recipient's private key upon arrival to the recipient's device
+    \newline
+- There should be limited access to the back end of the messaging application. This 
+  includes most ports being closed, excluding the one receiving XML stanza and handling HTTP requests. All requests will be handled via an API and/or a Web Server.
+    \newline
+- Users must authenticate themselves via a Username and Password to enable requests related 
+  to that account
+    \newline
+- All users only have control over the scope of their account.
+  \newline
+- Users have a limited amount of requests available to them
+  \newline
+- Upon retrieval of a user's messages to their client side device, a request will be sent to the server to erase all messages just received. Upon closing of the application, those messages will also be erased from the client device
+  \newline
+  
+\subsection{Availability}
+- The application should have a publicly available website that almost anyone can access 
+  around the globe \newline
+- Registration should be quick and straight forward \newline
+- The server should always be active excluding maintenance \newline
+- Accessible to anybody who has a mobile device with Android and IOS platforms \newline
+- Accessible through the Google Play Store or IOS App Store \newline
 
-\subsection{Design and Implementation}\label{sec:designandimplementationrequirements}
-This is a subsection containing notations.
+\subsection{Usability}
+- The GUI should be straight forward and not overwhelming or confusing  \newline
+- A user should not have to explore the application in depth in order to quickly begin using it  \newline
+
+\subsection{Scalability}
+- The database and server will be easily upgradable with Processing Power, RAM, and SSD in order to support more on coming users.   \newline
+- Server should be able to welcome up to 1000 new users per month \newline
+- Application should be able to withstand introduction to IOS App Store and Android Google Play \newline
+- Application should be able to implement a public domain name on the World Wide Web \newline
+- Application should be able to handle larger Chat Rooms and have faster messaging speeds \newline
+
+
+\section{Operational Requirements}\label{sec:operationalrequirements}
+A user needs to have access to a touch screen mobile device, preferably an Android or an IOS device that can install the application. They will also need  internet access on their mobile device to access the application for installation and to connect to the Application's Server. With Internet access, the User can receive and send messages in real time. The mobile device’s permissions should allow internet access and local storage for the application to work. Having touch screen capability helps the User type all their messages with a keyboard and navigate the application with ease.
+
+\section{Design and Implementation}\label{sec:designandimplementationrequirements}
+- The android app data needs to be normalized. \newline
+- The app will maintain a simple and accessible style. \newline
+- The messaging app will have phrasing and language easy to understand for anyone of all 
+  ages, groups and fits a variety of situations. \newline
+- Users should not have access to chat history after an allotted time or if read \newline
+- Application should not have Location Data or personal information \newline
+- The application will be restricted to android and IOS platforms for mobile applications \newline
+- Users should not have access to User information \newline
+- User Information other than Username and Password can not be publicly accessible \newline
+
 
 \end{document}
-
