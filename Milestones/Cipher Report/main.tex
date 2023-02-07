@@ -9,6 +9,7 @@
 \usepackage{amsthm}
 \usepackage{amssymb}
 \usepackage{multirow}
+\usepackage{array}
 % Unicode
 \usepackage[utf8]{inputenc}
 \usepackage{hyperref}
@@ -89,6 +90,28 @@ The intended use can pose an ethical issue. A secure encrypted messaging applica
 
 \subsection{Attempts}\label{sec:attempts}
 There are several existing applications that seek to solve this problem. However, they are not without their shortcomings.
+
+\setlength{\tabcolsep}{4pt} %Gap between letters and boxes 
+\resizebox{\textwidth}{!}{
+\begin{tabular}{|l|c|c|c|c|c|c|} 
+
+ \hline
+ \multicolumn{7}{|c|}{Existing Solutions} \\
+ \hline
+ Features & Facebook Messenger  &  iMessage & Telegram & WhatsApp& Wire & Signal\\
+ \hline
+ Collects User Data & Yes & Yes & Yes & Yes & No & No \\
+ \hline
+ Encryption by Default & No & Yes & No & Yes & Yes & Yes \\
+ \hline
+ Open-source \\(code and server)& No & No & No & No & Yes & Yes\\
+ \hline
+ Metadata\\ is Encrypted & No & No & No & No & No & Yes\\
+ \hline 
+ Stores timestamps \\and IP addresses &Yes&Yes & Yes & Yes & Yes &No \\
+ \hline 
+\end{tabular} 
+}
 
 \section{System Specifications}\label{sec:sysspecs}
 \subsection{User Classes}\label{sec:userclasses}
