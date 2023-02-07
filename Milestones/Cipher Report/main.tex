@@ -79,35 +79,97 @@ Please fill out abstract
 % % 	\tableofcontents
 
 \section{Introduction}\label{sec:intro}
-The problem we are trying to solve is building a secure, non-persistent, instant messaging application. The foundation behind this app
+As technologies continue to advance at a rapid pace and communications are taking place almost entirely online; what steps can be taken to ensure personal privacy? It is becoming increasingly visible that the personal information you put online is not safe from prying eyes. In the wake of massive hacking scandals, governmental spying, and corporate data collection, we as individuals must evolve and develop technologies that preserves our right to privacy. We aim to develop a secure non persistent messaging applications that incorporates end-to-end encryption.
 
 \subsection{Importance}\label{sec:importance}
-The most valuable asset to have is a user’s data because of the identity it forms. Security is an important factor in instant messaging applications because it prevents access to the User’s information. User information can be logged on a server with their emails, passwords, and location. A compromised server can give access to all this information. Debatably the most important information may come from the chat logs/history where information is sent through various media forms such as images, videos, links, and text that could be personal and sensitive information relating to the user. Having a non-persistent chat implementation ensures the user’s privacy is respected by the administrators and protected from unwanted eyes.
+The most valuable asset to have is a user’s data because of the identity it forms. Security is an important factor in instant messaging applications because it prevents access to the user’s information. User information is often logged on a server with their emails, passwords, contacts, messages, and IP addresses are stored. A compromised server can give access to all this information. Debatably the most important information may come from the chat logs and contact history where information is sent through various media forms such as images, videos, links, and text that could be personal and sensitive information relating to the user. Having a non-persistent chat implementation ensures the user’s privacy is respected by the administrators and protected from unwanted eyes.
 
 \subsection{Challenges}\label{sec:challenges}
 The intended use can pose an ethical issue. A secure encrypted messaging application where chat logs are not stored can pose an ethical issue. Some users can use this to protect themselves from tyrannical governments, blackmail, hackers, or third-party ad targeting. However, this can also be used for malicious purposes where it can serve as a hub for criminals to avoid government or law enforcement from viewing their messages and monitoring their ploys.
 
 \subsection{Attempts}\label{sec:attempts}
-Existing solutions to this problem would be What's App, Signal, Grindr, and Zoom. Each of which has some aspects of security.
-\subsubsection{Shortcomings}\label{sec:shortcomings}
-This is a subsection containing notations.
+There are several existing applications that seek to solve this problem. However, they are not without their shortcomings.
 
 \section{System Specifications}\label{sec:sysspecs}
-This section includes literature review.... As stated in Section \ref{sec:intro}, this is good.
-
 \subsection{User Classes}\label{sec:userclasses}
-This is a subsection containing preliminaries.
+
+\subsubsection{Room Administrator}
+This class of user refers to a user who created a chatroom. Being in this user class would allow a person full control over the chatroom they created. They should be allowed to kick users, invite users, assign roles, set chatroom permissions, and destroy the chatroom. This user class also includes all aspects of the general user class. 
+\subsubsection{Room Member}
+This class of user refers to a user who was invited or joined a chatroom. This user class would be allowed the bare minimum amount of control granted by the chatroom administrator. They could send messages, and potentially invite other users if the admin allows it. They are also susceptible to being kicked or blocked from the chatroom. They can however be assigned a role that allows them a higher level of control by the room administrator.  This user class also includes all aspects of the general user class. 
+\subsubsection{General Users}
+This class of user refers to all other users that exist outside of chat rooms. General users should be allowed to add friends, block users, see their friend's statuses, create chat rooms and send direct messages to their friends.
 
 \subsection{Functional Requirements}\label{sec:funcrequirements}
-This is a subsection containing notations.
+All functional requirements only exist in the scope of the User's own account
+\subsubsection{Register User Account}
+Users will create an account with a username, password, and email. If the username is taken, or there is already an account registered to the email, the user will be notified and the account not created
+\subsubsection{Change Password}
+In the event of a compromised account or a user forgets his/her password, the user should be able to reset their password via their email.
+\subsubsection{Unregister Account}
+If a user wants to delete their account, they will be able to do so by following a series of steps available on the app. A user can only delete the account they are logged in on.
+\subsubsection{Set User Presence}
+A user will be able to choose whether they want their presence shown to their friends or not. Their presence will be shown by default.
+\subsubsection{Edit User Profile}
+A user can edit their profile with an uploaded picture, and a summary about themselves
+\subsubsection{Manage Friend List}
+A user should be allowed to add and remove friends
+\subsubsection{View Friends Statuses}
+A user should be allowed to see what friends are actively using the app via their statuses; if their friends haven't disabled status viewing. 
+\subsubsection{Manage Blocked Users}
+A user should be able to block another user from messaging them, inviting them to chat rooms, and requesting them as a friend. All blocked users will be stored in a blocked users list for easy management and potential unblocking. 
+\subsubsection{Create Chat Room}
+A user should be able to create a chatroom. This user will automatically be the administrator of the chatroom, and have the highest level of permissions within the context of the chatroom.
+\subsubsection{Administrate Chatroom}
+A user who has the proper permissions (Admin) should be able to kick users, set the chatroom to invite only, closed, or open to join. The Admin of the chatroom should also be allowed to grant users higher level of access, such as allowing them to invite their friends or making them an administrator as well.
 
-\subsection{Non-function Requirements}\label{sec:nonfuncrequirements}
-This is a subsection containing notations.
+\subsection{Non-functional Requirements}\label{sec:nonfuncrequirements}
+\subsubsection{Performance}
+- A user should be able to register an account within 30 seconds given a valid username, 
+  password, and email
+- Any message sent to the server whether it be an API request or an XML stanza should reach 
+  the server within a second from the push of a button.
+- Given an active client side device, any messages sent to said user should reach them 
+  within ten seconds.
+\subsubsection{Reliability}
+- No messages will be lost in transit given an active Wifi connection
+- The server should always be running, excluding needed maintenance
+- All web requests submitted will be executed within 5 seconds given the right 
+  credentials
+\subsubsection{Security}
+- All messages sent should be encrypted with the recipients public key and then decrypted 
+  via the recipient's private key upon arrival to the recipient's device
+- There should be limited access to the back end of the messaging application. This 
+  includes most ports being closed, excluding the one receiving XML stanza and handling HTTP requests. All requests will be handled via an API and/or a Web Server.
+- Users must authenticate themselves via a Username and Password to enable requests related 
+  to that account
+- All users only have control over the scope of their account.
+- Users have a limited amount of requests available to them
+- Upon retrieval of a user's messages to their client side device, a request will be sent to the server to erase all messages just received. Upon closing of the application, those messages will also be erased from the client device
+\subsubsection{Availability}
+- The application should have a publicly available website that almost anyone can access 
+  around the globe
+- Registration should be quick and straight forward
+- The server should always be active excluding maintenance
+\subsubsection{Usability}
+- The GUI should be straight forward and not overwhelming or confusing
+- A user should not have to explore the application in depth in order to quickly begin using it
+\subsubsection{Scalability}
+- The database and server will be easily upgradable with Processing Power, RAM, and SSD in order to support more on coming users. 
 
 \subsection{Operational Requirements}\label{sec:operationalrequirements}
-This is a subsection containing notations.
+- A machine running the Ubuntu Linux 22.04 operating system
+- Ejabberd running within the daemon of said machine and listening on specified ports
+- Ejabberd comes with an internal database that stores user information such as usernames, passwords, and messages.
+- Ejabberd will use a ReST API for http requests
+- An external MySQL database that stores important user information such as public keys 
+  used for encryption
+- An iOS Application coded in Swift and a Android Application coded in Java
+- Libraries within these applications that support XML stanza transfer and http requests
+- Data structures that support efficient use of memory and processing power
 
 \subsection{Design and Implementation}\label{sec:designandimplementationrequirements}
 This is a subsection containing notations.
 
 \end{document}
+
