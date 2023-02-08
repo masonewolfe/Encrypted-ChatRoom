@@ -2,17 +2,17 @@ const xmpp = require("simple-xmpp");
 
 xmpp.on("online", data => {
 
-    console.log('Welcome ${}')
+    console.log('Welcome ' + data.jid.user)
     send();
 })
 
 function send() {
-    xmpp.send("mason@selfdestructim.com", "What is up my guy?")
+    xmpp.send("sydney@selfdestructim.com", "Hello from nodejs!")
 }
 
-xmpp.on("chat", (from, messgae) => {
+xmpp.on("chat", (from, message) => {
     console.log('You have a new message!')
-    console.log('${from} said ${message}')
+    console.log(from + ' said ' + message)
 })
 
 xmpp.connect({
