@@ -1,10 +1,10 @@
-import SendMessage from "./SendMessage";
+import XMPPController from "./XMPPController";
 
 function App() {
   return (
-    <div className="App">
+    <div>
       Cipher
-      <SendMessage></SendMessage>
+      <XMPPController></XMPPController>
     </div>
   );
 }
