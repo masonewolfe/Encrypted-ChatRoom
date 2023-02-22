@@ -107,68 +107,122 @@ While people perceive Snapchat to be non persistent, they actually store almost 
 WhatsApp does use end to end encryption, however your metadata is not encrypted which means it is easily accessible by staff and possible hackers who you are talking to, when, and from where. WhatsApp has also worked with intelligence agencies in the past. However, they do not store your chat history on their servers for long. Only if the message cannot be delivered to you right away. Once the message is delivered to your device, it is then deleted. [1]
 \subsubsection{Telegram}
 Telegram is not end to end encrypted by default. It is only encrypted from client to server. You can choose to make a secret chat with one other person which will be end to end encrypted. Telegram doesn't support end to end encryption for group chats. They also collect your IP address, device information, and username changes. [6] [10]
-\newline \newline
 
+\begin{figure}
+    \centering
+    \caption{Where Do Existing Solutions Fall Short?}
+    \label{fig:existingsols}
+    \setlength{\tabcolsep}{4pt} %Gap between letters and boxes 
+    \resizebox{\textwidth}{!}{
+        \begin{tabular}{|l|c|c|c|c|c|c|} 
+            \hline
+            Features & Facebook Messenger  &  iMessage & Telegram & WhatsApp& Wire & Signal\\
+            \hline
+            Collects User Data & Yes & Yes & Yes & Yes & No & No \\
+            \hline
+            Encryption by Default & No & Yes & No & Yes & Yes & Yes \\
+            \hline
+            Open-source \\(code and server)& No & No & No & No & Yes & Yes\\
+            \hline
+            Metadata\\ is Encrypted & No & No & No & No & No & Yes\\
+            \hline 
+            Stores timestamps \\and IP addresses &Yes&Yes & Yes & Yes & Yes &No \\
+            \hline 
+        \end{tabular} 
+    }
+\end{figure}
 
+\section{User Classes/Functional Requirements}\label{sec:userclasses}
 
+\subsection{General User}\label{sec:genuser}
+This class of user refers to all users that exist on Cipher. General users should be able to do a variety of tasks regarding sending messages, editing their profile/settings, and editing their friends and blocked users.
+\subsubsection{Functional Requirements}\label{sec:genfuncreq}
+- Send Encrypted Message\\
+- View Non-Persistent Messages\\
+- Register Account\\
+- Terminate Account\\
+- Change Password\\
+- Edit Profile\\
+- Set Presence\\
+- View Friends List\\
+- View Friends' Presences\\
+- Add Friend\\
+- Remove Friend\\
+- Block Friend\\
+- View Blocked List\\
+- Block User\\
+- Unblock User\\
+- Create Chat-Room
 
-\setlength{\tabcolsep}{4pt} %Gap between letters and boxes 
-\resizebox{\textwidth}{!}{
-\begin{tabular}{|l|c|c|c|c|c|c|} 
+\subsection{Chat-Room Member}\label{sec:chatmem}
+This class of user refers those who join a chat-room and are not given administrator permission. This type of user would only have the ability to send and view messages within the chat-room, as well as add/invite another user dependent upon the chat-room accessibility set by administrator.
+\subsubsection{Functional Requirements}\label{sec:chatfuncreq}
+Chat-Room Member inherits all Functional Requirements \ref{sec:genfuncreq} from General User. \ref{sec:genuser}\\\\
+- Send Encrypted Message in Chat-Room\\
+- View Non-Persistent Messages Sent to Chat-Room\\
+- View Users in Chat-Room\\
+- Add/Invite User to Chat-Room(dependent on chat-room accessibility settings)\\
+- Leave Chat-Room
 
- \hline
- \multicolumn{7}{|c|}{Existing Solutions} \\
- \hline
- Features & Facebook Messenger  &  iMessage & Telegram & WhatsApp& Wire & Signal\\
- \hline
- Collects User Data & Yes & Yes & Yes & Yes & No & No \\
- \hline
- Encryption by Default & No & Yes & No & Yes & Yes & Yes \\
- \hline
- Open-source \\(code and server)& No & No & No & No & Yes & Yes\\
- \hline
- Metadata\\ is Encrypted & No & No & No & No & No & Yes\\
- \hline 
- Stores timestamps \\and IP addresses &Yes&Yes & Yes & Yes & Yes &No \\
- \hline 
-\end{tabular} 
-}
+\subsection{Chat-Room Administrator}\label{sec:chatadmin}
+This class of user refers to those who create a chat-room. This user would have complete control over the chat-room they created. They would have the ability to modify aspects of the chat-room such as settings, and members.
+\subsubsection{Functional Requirements}
+Chat-Room Administrator inherits all Functional Requirements \ref{sec:genfuncreq} from General User, \ref{sec:genuser} as well as all Functional Requirements \ref{sec:chatfuncreq} from Chat-Room Member. \ref{sec:chatmem}\\\\
+- Edit Chat-Room Accessibility\\
+- Add User to Chat-Room\\
+- Accept/Deny Request to Join Chat-Room\\
+- Remove User from Chat-Room\\
+- Set User Permissions\\
+- Terminate Chat-Room
 
-\section{User Classes}\label{sec:userclasses}
-
-\subsection{Room Administrator}
-This class of user refers to a user who created a chatroom. Being in this user class would allow a person full control over the chatroom they created. They should be allowed to kick users, invite users, assign roles, set chatroom permissions, and destroy the chatroom. This user class also includes all aspects of the general user class. 
-\subsection{Room Member}
-This class of user refers to a user who was invited or joined a chatroom. This user class would be allowed the bare minimum amount of control granted by the chatroom administrator. They could send messages, and potentially invite other users if the admin allows it. They are also susceptible to being kicked or blocked from the chatroom. They can however be assigned a role that allows them a higher level of control by the room administrator.  This user class also includes all aspects of the general user class. 
-\subsection{General Users}
-This class of user refers to all other users that exist outside of chat rooms. General users should be allowed to add friends, block users, see their friend's statuses, create chat rooms and send direct messages to their friends.
-
-\section{Functional Requirements}\label{sec:funcrequirements}
-All functional requirements only exist in the scope of the User's own account
-\subsection{Encrypt User Messages}
-The messages will need to be encrypted from end to end using a popular encryption algorithm. [5]
-\subsection{Non-Persistance}
-A users message history should be deleted from the server after receiving a message. After the user closes the application, the message should also be erased from the client's device.
-\subsection{Register User Account}
+\section{Functional Requirements Specifications}\label{sec:funcrequirements}
+All functional requirements only exist in the scope of the user's own account.
+\subsection{Send Encrypted Message}
+A user should be able to send a message to a specific JID and it must be encrypted from end to end using a popular encryption algorithm. [5]
+\subsection{View Non-Persistent Messages}
+A user should be able to view their received messages. Message history should be deleted from the server after receiving a message (when the user logs on). After the user closes the application, the message should also be erased from the client's device.
+\subsection{Register Account}
 Users will create an account with a username, password, and email. If the username is taken, or there is already an account registered to the email, the user will be notified and the account not created
+\subsection{Terminate Account}
+If a user wants to delete their account, they will be able to do so by following a series of steps available on the app. A user can only delete the account they are logged in on.
 \subsection{Change Password}
 In the event of a compromised account or a user forgets his/her password, the user should be able to reset their password via their email.
-\subsection{Unregister Account}
-If a user wants to delete their account, they will be able to do so by following a series of steps available on the app. A user can only delete the account they are logged in on.
-\subsection{Set User Presence}
+\subsection{Edit Profile}
+A user can edit their profile with an uploaded picture, and a summary about themselves.
+\subsection{Set Presence}
 A user will be able to choose whether they want their presence shown to their friends or not. Their presence will be shown by default.
-\subsection{Edit User Profile}
-A user can edit their profile with an uploaded picture, and a summary about themselves
-\subsection{Manage Friend List}
-A user should be allowed to add and remove friends
-\subsection{View Friends Statuses}
-A user should be allowed to see what friends are actively using the app via their statuses; if their friends haven't disabled status viewing. 
-\subsection{Manage Blocked Users}
-A user should be able to block another user from messaging them, inviting them to chat rooms, and requesting them as a friend. All blocked users will be stored in a blocked users list for easy management and potential unblocking. 
-\subsection{Create Chat Room}
+\subsection{View Friends List}
+A user should be able to see a list of all users they added.
+\subsection{View Friends' Presences}
+A user should be allowed to see what friends are actively using the app via their status/presence; if their friends haven't disabled status viewing.
+\subsection{Add Friend}
+A user should be able to add a friend to their friends list by searching the user's JID.
+\subsection{Remove Friend}
+A user should be able to remove a friend from their friends list.
+\subsection{Block Friend}
+A user should be able to block a friend on their friends list, effectively removing that user's JID from the friends list and hiding all messages received from that JID.
+\subsection{View Blocked List}
+A user should be able to see all users they have blocked in a list.
+\subsection{Block User}
+A user should be able to block a user by searching the user's JID.
+\subsection{Unblock User}
+A user should be able to take another user off of their blocked list, effectively showing all future messages received from that JID and allowing that JID to be added as a friend.
+\subsection{Create Chat-Room}
 A user should be able to create a chatroom. This user will automatically be the administrator of the chatroom, and have the highest level of permissions within the context of the chatroom.
-\subsection{Administrate Chatroom}
-A user who has the proper permissions (Admin) should be able to kick users, set the chatroom to invite only, closed, or open to join. The Admin of the chatroom should also be allowed to grant users higher level of access, such as allowing them to invite their friends or making them an administrator as well.
+\subsection{Send Encrypted Message in Chat-Room}
+A user should be able to send a message that is fully encrypted, end to end, to all users in that chat-room.
+\subsection{View Non-Persistent Messages Sent to Chat-Room}
+A user should be able to view a message sent to the chat-room. After a user has received the message, the server should delete the message for that user, and once the user closes the application, the message should be erased from the client's device. This will happen individually for all users in the chat-room.
+\subsection{View Users in Chat-Room}
+A user should be able to see a list of all Chat-Room Members \ref{sec:chatmem} and Administrators. \ref{sec:chatadmin}
+\subsection{Add/Invite User to Chat-Room}
+This requirement is dependent on the settings of the chat-room. When set to open, any member or admin can add a user to the chat-room. When set to restricted, only an admin can add another user to the chat-room, but a member can invite another user which then can be accepted or denied by an admin. When set to closed, no users can be added to the chat-room.
+\subsection{Remove User from Chat-Room}
+A user should be able to remove another user from the chat-room.
+\subsection{Set User Permissions}
+A user should be able to set whether another user is a Chat-Room Member, \ref{sec:chatmem} or a Chat-Room Administrator. \ref{sec:chatadmin}
+\subsection{Terminate Chat-Room}
+A user should be able to terminate the chat-room, erasing all messages and preventing any future use of the chat-room.
 
 \section{Non-functional Requirements}\label{sec:nonfuncrequirements}
 \subsection{Performance}
