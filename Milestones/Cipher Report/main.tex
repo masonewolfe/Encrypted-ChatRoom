@@ -1,9 +1,6 @@
 \documentclass[11pt]{article}
-
 \usepackage[pages=all, color=black, position={current page.south}, placement=bottom, scale=1, opacity=1, vshift=5mm]{background}
-
 \usepackage[margin=1in]{geometry} % full-width
-
 % AMS Packages
 \usepackage{amsmath}
 \usepackage{amsthm}
@@ -26,11 +23,9 @@
 	pdfproducer={LaTeX},
 	pdfcreator={pdflatex}
 }
-
 % Natbib
 \usepackage[sort&compress,numbers,square]{natbib}
 % \bibliographystyle{mplainnat}
-
 % Theorem, Lemma, etc
 \theoremstyle{plain}
 \newtheorem{theorem}{Theorem}
@@ -50,26 +45,45 @@
 \newtheorem{remark}[theorem]{Remark}
 \newtheorem{problem}[theorem]{Problem}
 \newtheorem{principle}[theorem]{Principle}
-
 \usepackage{graphicx}
 \graphicspath{{fig/}}
-
 %\usepackage[linesnumbered,ruled,vlined,commentsnumbered]{algorithm2e} % use algorithm2e for typesetting algorithms
 \usepackage{algorithm, algpseudocode} % use algorithm and algorithmicx for typesetting algorithms
 \usepackage{mathrsfs} % for \mathscr command
-
 \usepackage{lipsum}
 
-
-
-\date{
-\today
-}
-
 \begin{document}
-\title{Secure Non-persistent Instant Messaging}
-\author{Dylan Moran, Sydney Pennington, Jordan Rivera, Joey Saline, Mason Wolfe}
-\maketitle
+\begin{titlepage}
+   \begin{center}
+   
+    \vspace*{1cm}
+    \Huge{
+        
+        \textbf{Cipher}
+    }
+    
+    \vspace{0.5cm}
+    \Huge{
+        Secure Non-persistent Instant Messaging
+    }
+    
+    \vspace{1.5cm}
+    \large{
+        Dylan Moran, Sydney Pennington, Jordan Rivera, Joey Saline, Mason Wolfe
+    }
+
+    \vfill
+    This project was developed for and under the guidance of Professor Pradeep K. Atrey\ref{} of the University of Albany. Certain aspects of the system were direct requirements specified by Professor Atrey as the sponsor for Cipher.
+            
+    \vspace{0.8cm}
+                 
+    Department of Computer Science\\
+    University at Albany\\
+    United States\\
+    \today
+            
+   \end{center}
+\end{titlepage}
 
 
 % % 	\tableofcontents
