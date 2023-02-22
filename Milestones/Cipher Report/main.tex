@@ -73,7 +73,7 @@
     }
 
     \vfill
-    This project was developed for and under the guidance of Professor Pradeep K. Atrey\ref{} of the University of Albany. Certain aspects of the system were direct requirements specified by Professor Atrey as the sponsor for Cipher.
+    This project was developed for and under the guidance of Professor Pradeep K. Atrey of the University of Albany. Certain aspects of the system were direct requirements specified by Professor Atrey as the sponsor for Cipher.
             
     \vspace{0.8cm}
                  
@@ -89,25 +89,24 @@
 % % 	\tableofcontents
 
 \section{Introduction}\label{sec:intro}
-As technologies continue to advance at a rapid pace and communications are taking place almost entirely online; what steps can be taken to ensure personal privacy? It is becoming increasingly visible that the personal information you put online is not safe from prying eyes. In the wake of massive hacking scandals, governmental spying, and corporate data collection, we as individuals must evolve and develop technologies that preserves our right to privacy. We aim to develop a secure non persistent messaging applications that incorporates end-to-end encryption. End to End Encryption is used to ensure messages are sent and read securely without third party surveillance. ("What Is End-to-end Encryption?") End to End Encryption can vary in strength depending on the size of the keys, padding, and layers of encryption. Non persistence chats prevent chat history, backlogs, and any trace of messaging to be erased when a message is read.
+As technologies continue to advance at a rapid pace and communications are taking place almost entirely online; what steps can be taken to ensure personal privacy? It is becoming increasingly visible that the personal information you put online is not safe from prying eyes. In the wake of massive hacking scandals, governmental spying, and corporate data collection, we as individuals must evolve and develop technologies that preserves our right to privacy. We aim to develop a secure non persistent messaging applications that incorporates end-to-end encryption. End to End Encryption is used to ensure messages are sent and read securely without third party surveillance. [2] End to End Encryption can vary in strength depending on the size of the keys, padding, and layers of encryption. Non persistence chats prevent chat history, backlogs, and any trace of messaging to be erased when a message is read.
 
 \subsection{Importance}\label{sec:importance}
 The most valuable asset to have is a user’s data because of the identity it forms. Security is an important factor in instant messaging applications because it prevents access to the user’s information. User information is often logged on a server with their emails, passwords, contacts, messages, and IP addresses are stored. A compromised server can give access to all this information. Debatably the most important information may come from the chat logs and contact history where information is sent through various media forms such as images, videos, links, and text that could be personal and sensitive information relating to the user. Having a non-persistent chat implementation ensures the user’s privacy is respected by the administrators and protected from unwanted eyes.
 
 \subsection{Challenges}\label{sec:challenges}
-The intended use can pose an ethical issue. A secure encrypted messaging application where chat logs are not stored can pose an ethical issue. Some users can use this to protect themselves from tyrannical governments, blackmail, hackers, or third-party ad targeting. However, this can also be used for malicious purposes where it can serve as a hub for criminals to avoid government or law enforcement from viewing their messages and monitoring their ploys. Also end to end encryption can still be susceptible to man in the middle attacks and key forging so we must develop a hybrid style of encryption, that includes multiple layers of security without effecting performance. (Marlinspike and Perrin)
+The intended use can pose an ethical issue. A secure encrypted messaging application where chat logs are not stored can pose an ethical issue. Some users can use this to protect themselves from tyrannical governments, blackmail, hackers, or third-party ad targeting. However, this can also be used for malicious purposes where it can serve as a hub for criminals to avoid government or law enforcement from viewing their messages and monitoring their ploys. Also end to end encryption can still be susceptible to man in the middle attacks and key forging so we must develop a hybrid style of encryption, that includes multiple layers of security without effecting performance. [3]
 
-\subsection{Attempts}\label{sec:attempts}
+\subsection{Exisiting Solutions/What Has Been Done To Solve This Problem}\label{sec:exisitingsols}
 There are several existing applications that seek to solve this problem. However, they are not without their shortcomings.
 \subsubsection{Facebook Messenger}
-Facebook Messenger collects and stores almost all user information. Facebook is well known to sell user information and has worked with intelligence agencies in the past. User messages are not encrypted by default, however they have recently added a feature which allows a user to opt in for one to one end to end encryption. (Sarwar)
+Facebook Messenger collects and stores almost all user information. Facebook is well known to sell user information and has worked with intelligence agencies in the past. User messages are not encrypted by default, however they have recently added a feature which allows a user to opt in for one to one end to end encryption. [9]
 \subsubsection{Snapchat}
-While people perceive Snapchat to be non persistent, they actually store almost all of your data. The messages and pictures may be non persisting your device, however your message history is still saved in Snapchat's cloud. Also pictures are encrypted end to end however, messages are not.
-(Dvorak) ("Privacy Policy")
+While people perceive Snapchat to be non persistent, they actually store almost all of your data. The messages and pictures may be non persisting your device, however your message history is still saved in Snapchat's cloud. Also pictures are encrypted end to end however, messages are not. [4] [8]
 \subsubsection{WhatsApp}
-WhatsApp does use end to end encryption, however your metadata is not encrypted which means it is easily accessible by staff and possible hackers who you are talking to, when, and from where. WhatsApp has also worked with intelligence agencies in the past. However, they do not store your chat history on their servers for long. Only if the message cannot be delivered to you right away. Once the message is delivered to your device, it is then deleted. ("About End-to-end Encryption")
+WhatsApp does use end to end encryption, however your metadata is not encrypted which means it is easily accessible by staff and possible hackers who you are talking to, when, and from where. WhatsApp has also worked with intelligence agencies in the past. However, they do not store your chat history on their servers for long. Only if the message cannot be delivered to you right away. Once the message is delivered to your device, it is then deleted. [1]
 \subsubsection{Telegram}
-Telegram is not end to end encrypted by default. It is only encrypted from client to server. You can choose to make a secret chat with one other person which will be end to end encrypted. Telegram doesn't support end to end encryption for group chats. They also collect your IP address, device information, and username changes. (Davies) (Pismennaya and Baryshevskiy) (Nesbo)
+Telegram is not end to end encrypted by default. It is only encrypted from client to server. You can choose to make a secret chat with one other person which will be end to end encrypted. Telegram doesn't support end to end encryption for group chats. They also collect your IP address, device information, and username changes. [6] [10]
 \newline \newline
 
 
@@ -147,7 +146,7 @@ This class of user refers to all other users that exist outside of chat rooms. G
 \section{Functional Requirements}\label{sec:funcrequirements}
 All functional requirements only exist in the scope of the User's own account
 \subsection{Encrypt User Messages}
-The messages will need to be encrypted from end to end using a popular encryption algorithm (Indeed Editorial Team)
+The messages will need to be encrypted from end to end using a popular encryption algorithm. [5]
 \subsection{Non-Persistance}
 A users message history should be deleted from the server after receiving a message. After the user closes the application, the message should also be erased from the client's device.
 \subsection{Register User Account}
@@ -260,16 +259,17 @@ A user needs to have access to a touch screen mobile device, preferably an Andro
 - Users should not have access to User information \newline
 - User Information other than Username and Password can not be publicly accessible \newline
 
+\newpage
 \section{References}
-(1) "About End-to-end Encryption." Faq.Whatsapp.Com, 1 Jan. 2021, faq.whatsapp.com/820124435853543/. Accessed 3 Feb. 2023. \newline \newline
-(2) "What Is End-to-end Encryption?" Www.Ibm.Com, 1 Jan. 2023, www.ibm.com/topics/end-to-end-encryption. Accessed 2 Feb. 2023. \newline \newline
-(3) Marlinspike, Moxie, and Perrin, Trevor. "The Double Ratchet Algorithm." Signal.Org, 20 Nov. 2016, signal.org/docs/specifications/doubleratchet/. Accessed 2 Feb. 2023. \newline \newline
-(4) "Privacy Policy." Values.Snap.Com, 29 Jun. 2022, values.snap.com/privacy/privacy-policy. Accessed 2 Feb. 2023. \newline \newline
-(5) Indeed Editorial Team. "Types of Encryption: 5 Common Encryption Algorithms." Www.Indeed.Com, 21 Jul. 2021, www.indeed.com/career-advice/career-development/types-of-encryption. Accessed 5 Feb. 2023. \newline \newline
-(6) Pismennaya, Kate, and Baryshevskiy, Anton. "How to Make a Really Secure Messaging App Similar to Signal?" Themindstudios.Com, 3 Jun. 2022, themindstudios.com/blog/how-to-make-a-secure-chat-app-like-signal/. Accessed 5 Feb. 2023. \newline \newline
-(7) Nesbo, Elliot. "Why Telegram Isn't As Secure As You Think It Is." www.makeuseof.Com, 14 Sept. 2021, www.makeuseof.com/telegram-security/v. Accessed 5 Feb. 2023. \newline \newline
-(8) Dvorak, Chyelle. "What Data Does Snapchat Collect?" Www.Reviews.Org, 24 Feb. 2022, www.reviews.org/internet-service/what-data-snapchat-collects/. Accessed 5 Feb. 2023. \newline \newline
-(9) Sarwar, Nadeem. "How Safe Is Facebook Messenger And How To Make It Even More Secure." Screenrant.Com, 17 Aug. 2021, screenrant.com/facebook-messenger-safety-end-to-encryption-chat-video-messages-explained/. Accessed 4 Feb. 2023. \newline \newline
-(10) Davies, Hannah. "Is Telegram Safe? Here’s What Security Experts Have to Say about the App." Www.Trustedreviews.Com, 26 Jan. 2022, www.trustedreviews.com/news/is-telegram-safe-4130553. Accessed 4 Feb. 2023. \newline
+[1] "About End-to-end Encryption." Faq.Whatsapp.Com, 1 Jan. 2021, faq.whatsapp.com/820124435853543/. Accessed 3 Feb. 2023. \newline \newline
+[2] "What Is End-to-end Encryption?" Www.Ibm.Com, 1 Jan. 2023, www.ibm.com/topics/end-to-end-encryption. Accessed 2 Feb. 2023. \newline \newline
+[3] Marlinspike, Moxie, and Perrin, Trevor. "The Double Ratchet Algorithm." Signal.Org, 20 Nov. 2016, signal.org/docs/specifications/doubleratchet/. Accessed 2 Feb. 2023. \newline \newline
+[4] "Privacy Policy." Values.Snap.Com, 29 Jun. 2022, values.snap.com/privacy/privacy-policy. Accessed 2 Feb. 2023. \newline \newline
+[5] Indeed Editorial Team. "Types of Encryption: 5 Common Encryption Algorithms." Www.Indeed.Com, 21 Jul. 2021, www.indeed.com/career-advice/career-development/types-of-encryption. Accessed 5 Feb. 2023. \newline \newline
+[6] Pismennaya, Kate, and Baryshevskiy, Anton. "How to Make a Really Secure Messaging App Similar to Signal?" Themindstudios.Com, 3 Jun. 2022, themindstudios.com/blog/how-to-make-a-secure-chat-app-like-signal/. Accessed 5 Feb. 2023. \newline \newline
+[7] Nesbo, Elliot. "Why Telegram Isn't As Secure As You Think It Is." www.makeuseof.Com, 14 Sept. 2021, www.makeuseof.com/telegram-security/v. Accessed 5 Feb. 2023. \newline \newline
+[8] Dvorak, Chyelle. "What Data Does Snapchat Collect?" Www.Reviews.Org, 24 Feb. 2022, www.reviews.org/internet-service/what-data-snapchat-collects/. Accessed 5 Feb. 2023. \newline \newline
+[9] Sarwar, Nadeem. "How Safe Is Facebook Messenger And How To Make It Even More Secure." Screenrant.Com, 17 Aug. 2021, screenrant.com/facebook-messenger-safety-end-to-encryption-chat-video-messages-explained/. Accessed 4 Feb. 2023. \newline \newline
+[10] Davies, Hannah. "Is Telegram Safe? Here’s What Security Experts Have to Say about the App." Www.Trustedreviews.Com, 26 Jan. 2022, www.trustedreviews.com/news/is-telegram-safe-4130553. Accessed 4 Feb. 2023. \newline
 
 \end{document}
