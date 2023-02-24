@@ -10,53 +10,55 @@ import UIKit
 import SwiftUI
 import XMPPFramework
 
-class PrivateMessageViewController: UIViewController {
+class PrivateMessageViewController: UIViewController{
     
     //############################################################################################################################//
+    //#                                                    Main Functions                                                        #//
+    //############################################################################################################################//
     
+    //Used to access default values
     let defaults = UserDefaults.standard
     
-    //############################################################################################################################//
-    
-    private let scrollView: UIScrollView = {
-        
-        let scrollView = UIScrollView()
-        scrollView.clipsToBounds = true
-        return scrollView
-        
-    }()
-    
-    //############################################################################################################################//
+    //###########################################################//
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-       
         title = "Private Message"
-        
-        //recieverTextField.delegate = self
-        logoutButton.addTarget(self, action: #selector(logoutButtonTapped), for: .touchUpInside)
-        sendButton.addTarget(self, action: #selector(sendButtonTapped), for: .touchUpInside)
-        selfDestructButton.addTarget(self, action: #selector(selfDestructButtonTapped), for: .touchUpInside)
-        
-        view.addSubview(scrollView)
-        scrollView.addSubview(recipientTextField)
-        scrollView.addSubview(messageTextView)
-        scrollView.addSubview(logoutButton)
-        scrollView.addSubview(sendButton)
-        scrollView.addSubview(selfDestructButton)
+        initializeHideKeyboard()
+        continueFunctionality()
+        calibrateButtons()
+        manageView()
     }
     
-    //############################################################################################################################//
+    //###########################################################//
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
     }
     
-    //############################################################################################################################//
+    //###########################################################//
     
     override func viewDidLayoutSubviews () {
         super.viewDidLayoutSubviews ()
+        configureViewLayout()
+    }
+    
+    //############################################################################################################################//
+    //#                                              View Management Functions                                                   #//
+    //############################################################################################################################//
+    
+    //Allows for a scrollable view
+    private let scrollView: UIScrollView = {
+        let scrollView = UIScrollView()
+        scrollView.clipsToBounds = true
+        return scrollView
+    }()
+    
+    //###########################################################//
+    
+    //Determines the position of elements on the screen/view
+    func configureViewLayout(){
         scrollView.frame = view.bounds
         recipientTextField.frame = CGRect(x: scrollView.left+30, y: 70, width: scrollView.width-60, height: 52)
         messageTextView.frame = CGRect(x: scrollView.left+30, y: 130, width: scrollView.width-60, height: 200)
@@ -65,37 +67,38 @@ class PrivateMessageViewController: UIViewController {
         selfDestructButton.frame = CGRect(x: messageTextView.left+30, y: sendButton.bottom+30, width: messageTextView.width-60, height: 52)
     }
     
-    //############################################################################################################################//
+    //###########################################################//
     
-    @objc private func logoutButtonTapped() {
-        
-        defaults.set(nil, forKey: "savedUserJID")
-        defaults.set(nil, forKey: "savedPassword")
-        defaults.set(false, forKey: "logged_in")
-        XMPPController.shared.disconnectStream()
-        
-        let vc = LoginViewController()
-        let nav = UINavigationController(rootViewController: vc)
-        nav.modalPresentationStyle = .fullScreen
-        present(nav, animated: true)
+    //Adds elements to the users view
+    func manageView(){
+        view.addSubview(scrollView)
+        scrollView.addSubview(recipientTextField)
+        scrollView.addSubview(messageTextView)
+        scrollView.addSubview(logoutButton)
+        scrollView.addSubview(sendButton)
+        scrollView.addSubview(selfDestructButton)
+    }
+    
+    //###########################################################//
+    
+    //Runs the referenced functions when a button is tapped
+    func calibrateButtons(){
+        logoutButton.addTarget(self, action: #selector(logoutButtonTapped), for: .touchUpInside)
+        sendButton.addTarget(self, action: #selector(sendButtonTapped), for: .touchUpInside)
+        selfDestructButton.addTarget(self, action: #selector(selfDestructButtonTapped), for: .touchUpInside)
+    }
+    
+    //###########################################################//
+    
+    func continueFunctionality(){
+        recipientTextField.delegate = self
     }
     
     //############################################################################################################################//
-    
-    @objc private func sendButtonTapped() {
-        guard let recipient = recipientTextField.text, let message = messageTextView.text,
-              !recipient.isEmpty, !message.isEmpty else {
-            alertMsgSendError()
-            return
-        }
-        XMPPController.shared.sendMessage(message: message, recipient: recipient)
-        let vc = ChatsViewController()
-        let nav = UINavigationController(rootViewController: vc)
-        nav.modalPresentationStyle = .fullScreen
-        present(nav, animated: true)
-    }
-    
+    //#                                                 Helper Functions                                                         #//
     //############################################################################################################################//
+    
+    //Alerts if a message is filled in incorrectly
     
     func alertMsgSendError(){
         let alert = UIAlertController(title: "Whoops!", message: "Please enter all information correctly", preferredStyle: .alert)
@@ -103,9 +106,30 @@ class PrivateMessageViewController: UIViewController {
         present(alert, animated: true)
     }
     
+    //###################################################################################//
+    
+    func initializeHideKeyboard(){
+     let tap: UITapGestureRecognizer = UITapGestureRecognizer(
+     target: self,
+     action: #selector(dismissMyKeyboard))
+     view.addGestureRecognizer(tap)
+     }
+    
+    //###################################################################################//
+    
+     @objc func dismissMyKeyboard(){
+     view.endEditing(true)
+     }
+    
+    //############################################################################################################################//
+    //#                                                  Button Functions                                                        #//
     //############################################################################################################################//
     
+    //Returns user to Chat ViewController when self destruct button is tapped
+    
     @objc private func selfDestructButtonTapped() {
+        
+        //Loads the Chat ViewController
         
         let vc = ChatsViewController()
         let nav = UINavigationController(rootViewController: vc)
@@ -113,7 +137,62 @@ class PrivateMessageViewController: UIViewController {
         present(nav, animated: true)
     }
     
+    //###################################################################################//
+    
+    //Sends a message to the input recipient and returns to the Chat ViewController when the send button is tapped
+    @objc private func sendButtonTapped() {
+        
+        //Ensures all fields are filled in and saves their values otherwise alerts an error
+        
+        guard let recipient = recipientTextField.text, let message = messageTextView.text,
+              !recipient.isEmpty, !message.isEmpty else {
+            alertMsgSendError()
+            return
+        }
+        
+        //XMPP referenced from singleton class XMPPController to send the message
+        
+        XMPPController.shared.sendMessage(message: message, recipient: recipient)
+        
+        //Loads Chat ViewController
+        
+        let vc = ChatsViewController()
+        let nav = UINavigationController(rootViewController: vc)
+        nav.modalPresentationStyle = .fullScreen
+        present(nav, animated: true)
+    }
+    
+    //###################################################################################//
+    
+    //Sends user to the login screen and logs them out when log out button is tapped
+    
+    @objc private func logoutButtonTapped() {
+        
+        //resets all the deafult values for userJID and password to nil
+        
+        defaults.set(nil, forKey: "savedUserJID")
+        defaults.set(nil, forKey: "savedPassword")
+        
+        //turns the flag for being "logged in" off
+        
+        defaults.set(false, forKey: "logged_in")
+        
+        XMPPController.shared.disconnectStream()
+        
+        //Loads the Login ViewController
+        let vc = LoginViewController()
+        let nav = UINavigationController(rootViewController: vc)
+        nav.modalPresentationStyle = .fullScreen
+        present(nav, animated: true)
+    }
+    
+    
+    
     //############################################################################################################################//
+    //#                                                    UI Elements                                                           #//
+    //############################################################################################################################//
+    
+    //Creates the element recipientTextField as a UI element to be used on the view
     
     private let recipientTextField: UITextField = {
         
@@ -131,7 +210,9 @@ class PrivateMessageViewController: UIViewController {
         
     }()
     
-    //############################################################################################################################//
+    //###################################################################################//
+    
+    //Creates the element message TextField as a UI element to be used on the view
     
     private let messageTextView: UITextView = {
         
@@ -146,7 +227,9 @@ class PrivateMessageViewController: UIViewController {
         
     }()
     
-    //############################################################################################################################//
+    //###################################################################################//
+    
+    //Creates the element loginButton as a UI element to be used on the view
     
     private let logoutButton: UIButton = {
         
@@ -162,7 +245,9 @@ class PrivateMessageViewController: UIViewController {
         return button
     }()
     
-    //############################################################################################################################//
+    //###################################################################################//
+    
+    //Creates the element sendButton as a UI element to be used on the view
     
     private let sendButton: UIButton = {
         
@@ -178,12 +263,14 @@ class PrivateMessageViewController: UIViewController {
         return button
     }()
     
-    //############################################################################################################################//
+    //###################################################################################//
+    
+    //Creates the element selfDestructButton as a UI element to be used on the view
     
     private let selfDestructButton: UIButton = {
         
         let button = UIButton()
-        button.setTitle("Self Destruct", for: .normal)
+        button.setTitle("Cancel", for: .normal)
         button.backgroundColor = .black
         button.setTitleColor(.white, for: .normal)
         button.layer.cornerRadius = 12
@@ -193,29 +280,24 @@ class PrivateMessageViewController: UIViewController {
         button.titleLabel?.font = .systemFont(ofSize: 20, weight: .bold)
         return button
     }()
-    
-//############################################################################################################################//
-    
 }
 
 //############################################################################################################################//
+//#                                                    Extensions                                                            #//
+//############################################################################################################################//
 
-
-/**
-extension LoginViewController: UITextFieldDelegate {
+extension PrivateMessageViewController: UITextFieldDelegate {
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         
-        if textField == emailTextField{
-            passwordTextField.becomeFirstResponder()
-        }
-        else if textField == passwordTextField{
-            loginButtonTapped()
+        if textField == recipientTextField{
+            messageTextView.becomeFirstResponder()
         }
         return true
     }
 }
-    */
+    
+//############################################################################################################################//
     
 
     
