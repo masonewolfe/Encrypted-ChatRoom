@@ -25,7 +25,7 @@ export default function SendMessage() {
   }
   return (
     <div>
-      <button onClick={send() && console.log("tried to send msg")}>Send jordan a message</button>
+      <button onClick={send() && console.log("tried to fetch")}>Send jordan a message</button>
     </div>
   )
 }
