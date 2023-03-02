@@ -25,7 +25,7 @@ xmpp.on("chatstate", (from, state) => {
 })
 
 function send() {
-    xmpp.send("joey@selfdestructim.com", "Hello from nodejs!")
+    xmpp.send("mason@selfdestructim.com", "Hello from nodejs!")
     console.log("Message sent.");
 }
 
