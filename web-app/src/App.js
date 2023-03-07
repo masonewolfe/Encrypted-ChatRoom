@@ -1,32 +1,22 @@
-import Dash from "./Dash.js";
-import Container from 'react-bootstrap/Container';
-import Nav from 'react-bootstrap/Nav';
-import Navbar from 'react-bootstrap/Navbar';
-import { useState } from "react";
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import Landing from './routes/Landing.js';
+import LogIn from './routes/LogIn.js';
+import SignUp from './routes/SignUp.js';
+import Home from './routes/Home.js';
+import Friends from './routes/Friends.js';
 
 function App() {
 
-  // const [display, setDisplay] = useState(false)
   return (
-    <>
-
-      <Navbar bg="light" expand="lg">
-        <Container>
-          <Navbar.Brand href="#home">Cipher</Navbar.Brand>
-          <Navbar.Toggle aria-controls="basic-navbar-nav" />
-          <Navbar.Collapse id="basic-navbar-nav">
-            <Nav className="me-auto">
-              <Nav.Link>Friends</Nav.Link>
-              <Nav.Link href="#">Groupchats</Nav.Link>
-              <Nav.Link href="#">Blocked</Nav.Link>
-              <Nav.Link className='ms-10' href="#">Profile</Nav.Link>
-            </Nav>
-          </Navbar.Collapse>
-        </Container>
-      </Navbar>
-      {/* {display && <Dash></Dash>} */}
-      <Dash></Dash>
-    </>
+    <Router>
+      <Routes>
+        <Route exact path='/' element={<Landing />} />
+        <Route path='/login' element={<LogIn />} />
+        <Route path='/signup' element={<SignUp />} />
+        <Route path='/home' element={<Home/>} />
+        <Route path='/friends' element={<Friends/>} />
+      </Routes>
+    </Router>
   );
 }
 

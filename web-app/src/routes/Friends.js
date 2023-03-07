@@ -1,5 +1,6 @@
 import React from 'react'
 import { Container } from 'react-bootstrap'
+import NavBar from '../components/NavBar'
 
 export default function Friends() {
 
@@ -34,6 +35,7 @@ export default function Friends() {
     })
     return (
         <>
+            <NavBar/>
             <div className='border text-center mt-3 py-3 bg-light'>Friends List</div>
             {friendsList}
         </>
