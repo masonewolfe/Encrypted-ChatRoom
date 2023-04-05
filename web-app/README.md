@@ -6,6 +6,10 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 In the project directory, you can run:
 
+MAIN START CALL HERE
+Ensure you are in the directory web-app
+In the terminal type npm start
+It will open in your browser automatically
 ### `npm start`
 
 Runs the app in the development mode.\
