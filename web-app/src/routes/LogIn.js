@@ -3,12 +3,18 @@ import NavBar from '../components/NavBar.js';
 import { Button, Col, Container, Form, Row } from 'react-bootstrap';
 
 export default function LogIn() {
+
+  // function handleSubmit() {
+  //   const data = new FormData()
+  //   console.log(data.formBasicPassword);
+  //   XmppControllerConnect(data.formBasicPassword)
+  // }
   return (
     <>
       <NavBar brand="Log In" />
       <div className='bg-dark'>
         <Container className='py-5 text-light text-center'>
-          <Form className="">
+          <Form >
             <Form.Group className="my-3 py-5" controlId="formBasicEmail">
               <Form.Label><h2>Cipher Id</h2></Form.Label>
               <Form.Control type="email" placeholder="Enter cipher id" />

@@ -4,7 +4,24 @@ import { Button, Col, Container, Row } from 'react-bootstrap';
 
 export default function Messages() {
 
-  const mes = [
+  // const unread_message_count =
+    fetch(
+      'http://3.91.204.251:5281/api/get_offline_count', {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+
+        "user": "joey@cipher.com",
+        "server": "3.91.204.251"
+      })
+    }
+    ).then(response => response.json()).then(response => console.log(JSON.stringify(response)))
+
+  const unread_messages = [
+
     {
       "key": 0,
       "from": "johnwick@cipher.com",
@@ -31,22 +48,23 @@ export default function Messages() {
       "body": "cipherrrrrrrrr"
     },
   ]
-  const messagesList = mes.map((props) => {
-    return (
-      <>
-        <div className='border py-5'>
-          <Container className='text-light'>
-            <Row className='px-md-3 px-lg-5'>
-              <Col className=''>
-                <img height={30} width={30} alt='Anonynmous mask profile' src="https://resume-website-bucket.s3.us-east-2.amazonaws.com/anonymous-mask.png" ></img>
-                {props.from}
-              </Col>
-            </Row>
-          </Container>
-        </div>
-      </>
-    )
-  })
+  const message_list =
+    unread_messages.map((props) => {
+      return (
+        <>
+          <div className='border py-5'>
+            <Container className='text-light'>
+              <Row className='px-md-3 px-lg-5'>
+                <Col className=''>
+                  <img height={30} width={30} alt='Anonynmous mask profile' src="https://resume-website-bucket.s3.us-east-2.amazonaws.com/anonymous-mask.png" ></img>
+                  {props.from}
+                </Col>
+              </Row>
+            </Container>
+          </div>
+        </>
+      )
+    })
   return (
     <>
       <NavBar brand='Messages' />
@@ -55,15 +73,17 @@ export default function Messages() {
           <Row>
             <Col className='col-12 col-md-4 py-3'>
               <Button variant='outline-light'>
-                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-chat-left" viewBox="0 0 16 16">
+                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" className="bi bi-chat-left" viewBox="0 0 16 16">
                   <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
-                  <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
+                  <path fillRule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
                 </svg>
                 <span className='ms-1'>New message</span>
               </Button>
             </Col>
           </Row>
-          <div className='pb-5'>{messagesList}</div>
+          <div className='pb-5'>
+            {message_list}
+          </div>
         </Container>
       </div>
     </>

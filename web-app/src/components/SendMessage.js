@@ -4,12 +4,18 @@ export default function SendMessage() {
 
   async function send() {
 
-    // const response = await fetch('44.212.55.214:5281/api/send_message');
-    // const json = await response.json();
-    // console.log(response);
+    // fetch(
+    //   'http://3.91.204.251:5281/api/get_offline_count', {
+    //   method: 'POST',
+    //   body: {
+    //     "user": "joey@cipher.com",
+    //     "server": "3.91.204.251"
+    //   }
+    // }
+    // ).then(function (response) { console.log(response) })
 
     // fetch(
-    //   '44.212.55.214:5281/api/send_message', {
+    //   'http://3.91.204.251:5281/api/send_message', {
     //   method: 'POST',
     //   headers: {
     //     'Accept': 'application/json',
@@ -25,20 +31,22 @@ export default function SendMessage() {
     //   })
     // }
     // ).then(response => response.json()).then(response => console.log(JSON.stringify(response)))
+
     fetch(
-      '44.212.55.214:5281/api/send_message', {
+      'http://3.91.204.251:5281/api/send_stanza', {
       method: 'POST',
-      mode: 'cors',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
       body: JSON.stringify({
 
-        "type": "headline",
         "from": "joey@cipher.com",
         "to": "mason@cipher.com",
-        "subject": "test",
-        "body": "Did you get my message?"
+        "stanza": "<message><ext attr='value'/><body>this is a stanza</body></message>"
       })
     }
-    )
+    ).then(response => response.json()).then(response => console.log(JSON.stringify(response)))
 
   }
   return (

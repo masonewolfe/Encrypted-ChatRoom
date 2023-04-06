@@ -1,8 +1,9 @@
 const xmpp = require("simple-xmpp");
+
 xmpp.on("online", data => {
 
     console.log('Welcome ' + data.jid.user)
-    send();
+    // send();
 })
 
 xmpp.on("close", data => {
@@ -24,14 +25,12 @@ xmpp.on("chatstate", (from, state) => {
     console.log('%s is now %s', from, state);
 })
 
-function send() {
-    xmpp.send("johnwick@cipher.com", "Hello from nodejs!")
-    console.log("Message sent.");
-}
+export function XmppControllerConnect(password) {
 
-xmpp.connect({
-    "jid": "joey@cipher.com",
-    "password": "password",
-    "host": "3.91.204.251",
-    "port": 5222
-})
+    xmpp.connect({
+        "jid": "joey@cipher.com",
+        "password": password,
+        "host": "3.91.204.251",
+        "port": 5222
+    })
+}
