@@ -7,6 +7,9 @@ target 'Non-Persistent E2E Messaging' do
 
   # Pods for Non-Persistent E2E Messaging
   pod 'XMPPFramework/Swift'
+  pod 'FontAwesome.swift'
+  pod 'SwiftyRSA', '~> 1.7'
+  pod 'KeychainSwift'
 
   target 'Non-Persistent E2E MessagingTests' do
     inherit! :search_paths

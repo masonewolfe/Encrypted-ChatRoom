@@ -2,7 +2,7 @@
 //  XMPPMessageEntity+CoreDataClass.swift
 //  
 //
-//  Created by Dylan Moran on 2/23/23.
+//  Created by Dylan Moran on 3/22/23.
 //
 //
 

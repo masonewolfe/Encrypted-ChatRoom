@@ -2,7 +2,7 @@
 //  XMPPMessageEntity+CoreDataProperties.swift
 //  
 //
-//  Created by Dylan Moran on 2/23/23.
+//  Created by Dylan Moran on 3/22/23.
 //
 //
 
@@ -17,8 +17,9 @@ extension XMPPMessageEntity {
     }
 
     @NSManaged public var body: String?
-    @NSManaged public var sender: String?
-    @NSManaged public var timeStamp: Date?
     @NSManaged public var recipient: String?
+    @NSManaged public var sender: String?
+    @NSManaged public var timeStamp: Date
+    @NSManaged public var read: Bool
 
 }
