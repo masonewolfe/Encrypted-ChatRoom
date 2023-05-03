@@ -1,0 +1,331 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Template for ICSI-499 Capstone Project Report
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Sets the document class for the document
+% Openany is added to remove the book style of starting every new chapter on an odd page (not needed for reports)
+% \documentclass[12pt,english, openany]{book}
+\documentclass[12pt]{article}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Loading packages that alter the style
+\usepackage[]{graphicx}
+\usepackage[]{color}
+\usepackage{alltt}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\setcounter{secnumdepth}{3}
+\setcounter{tocdepth}{3}
+\setlength{\parskip}{\smallskipamount}
+\setlength{\parindent}{0pt}
+
+% Set page margins
+\usepackage[top=100pt,bottom=100pt,left=68pt,right=66pt]{geometry}
+
+% Package used for placeholder text
+\usepackage{lipsum}
+
+% Prevents LaTeX from filling out a page to the bottom
+\raggedbottom
+
+% Adding both languages
+\usepackage[english, italian]{babel}
+
+% All page numbers positioned at the bottom of the page
+\usepackage{fancyhdr}
+\fancyhf{} % clear all header and footers
+\fancyfoot[C]{\thepage}
+\renewcommand{\headrulewidth}{0pt} % remove the header rule
+\pagestyle{fancy}
+
+% Changes the style of chapter headings
+\usepackage{titlesec}
+\titleformat{\chapter}
+   {\normalfont\LARGE\bfseries}{\thechapter.}{1em}{}
+% Change distance between chapter header and text
+\titlespacing{\chapter}{0pt}{50pt}{2\baselineskip}
+
+% Adds table captions above the table per default
+\usepackage{float}
+\floatstyle{plaintop}
+\restylefloat{table}
+
+% Adds space between caption and table
+\usepackage[tableposition=top]{caption}
+
+% Adds hyperlinks to references and ToC
+\usepackage{hyperref}
+\hypersetup{hidelinks,linkcolor = black} % Changes the link color to black and hides the hideous red border that usually is created
+
+% If multiple images are to be added, a folder (path) with all the images can be added here 
+\graphicspath{ {Figures/} }
+
+% Separates the first part of the report/thesis in Roman numerals
+%\frontmatter
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Starts the document
+\begin{document}
+
+%%% Selects the language to be used for the first couple of pages
+\selectlanguage{english}
+
+%%%%% Adds the title page
+\begin{titlepage}
+	\clearpage\thispagestyle{empty}
+	\centering
+	\vspace{1.5cm}
+   {\normalsize
+    \textbf{ICSI499 Capstone Project Report} \par
+}
+  	\vspace{1.5cm}
+	% Titles
+	{\Huge \textbf{Title of the Project}} \\
+	%\vspace{1cm}
+	%{\large \textbf{xxxxx} \par}
+	\vspace{3cm}
+	{\normalsize \textit{Project Team}\\
+		\vspace{0.25cm}
+	Student 1 Name (Student 1 Id)   \\ % \\ specifies a new line
+	             Student 2 Name (Student 2 Id) \\
+	             ............................. \\
+	             College of Engineering and Applied Sciences\\
+	             University at Albany, SUNY \par}
+	\vspace{4cm}
+ 
+    {\normalsize
+    \textit{Project Sponsor}\\
+    		\vspace{0.25cm}
+    Sponsor's name  \\
+    Sponsor's organization \\
+    and address \par
+}
+
+ 
+    \vspace{3cm}
+		
+	% Set the date
+	{\normalsize dd-mm-yyyy \par}
+	
+	\pagebreak
+
+
+\end{titlepage}
+	
+\clearpage\thispagestyle{empty}
+
+	\vspace{1cm}
+		\begin{center}
+\textbf{Acknowledgements}\\
+		\end{center}
+	\vspace{1cm}
+{\normalsize Here, we acknowledge the technical as well as logistics help of everyone who deserves it.
+\par}
+
+\clearpage\thispagestyle{empty}
+
+	\vspace{1cm}
+		\begin{center}
+\textbf{Abstract}\\
+		\end{center}
+	\vspace{1cm}
+{\normalsize Abstract goes here...\par}
+\clearpage\thispagestyle{empty}
+% Adds a table of contents
+\tableofcontents{}
+\clearpage\thispagestyle{empty}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%% Text body starts here!
+%\mainmatter
+
+\section{Problem Analysis}\label{chap:introduction}
+
+This section contains mostly what you did in Milestone 2, part 1, but possibly more detailed, as needed. 
+Starting with answering the following questions (in $\approx$150 words):
+\begin{itemize}
+    \item What problem you are trying to solve? 
+    \item Why this is an important problem?
+    \item How is this a challenging problem to solve? 
+\end{itemize}
+
+Further, answer the following questions (in $\approx$300 words):
+\begin{itemize}
+    \item What has been done to solve the problem or what are the existing solutions?
+    \item Why existing solutions are not sufficient or what are their key weaknesses and limitations?
+\end{itemize}
+
+Next, answer the following questions ($\approx$100 words):
+\begin{itemize}
+    \item What is your core idea and solution? 
+    \item What are the key characteristics of the proposed solution? 
+    \item How your solution is novel and better than existing solutions? 
+\end{itemize}
+
+Finally, summarize the key contributions of the project, maybe in bullets (in $\approx$50 words). Don't make the reader guess. Be clear and explicit on what problem your system solves and why the reader should care.
+In the end, describe the organization of this report (in $\approx$50 words) (not the technical structure of the project).
+
+Additional guidelines:
+\begin{itemize}
+    \item Evidence (including statistics and background information) should be cited from credible, relevant sources. Here is an example citing something \cite{bovet2019influence}. Here is an example, citing multiple references \cite{Samonte2018Polarity}, \cite{Judith2018Fake}. Make sure that anytime you make a claim, the claim is supported with clear evidence.
+    \item Summarize prior related work. You must have a reasonable number of citations.
+    \item Identify gaps and limitations in prior work (particularly gaps your system/application addresses). Specifically, make sure to mention limitations that make existing solutions not useful for the problems mentioned in the abstract/introduction. 
+    \item The past works should not be discussed one by one, rather they should be linked with each other.
+    \item Summarize the novelty and distinctiveness of the proposed work against existing work (explicitly in a table illustrating different aspects).
+\end{itemize}
+
+\section{Proposed System/Application/Study}\label{chap:proposed}
+
+\textbf{Length of this section should be 1000-1500 words.}
+
+\subsection{Overview} 
+($\approx$100 words)\\
+Provide an overview of the proposed system/application/study. Also, state how this whole section is organized, and what the readers should expect next.
+
+\subsection{Project Requirements}\label{sec:requirements}
+($\approx$500 words)\\
+In this section, you will provide descriptions of all requirements of the proposed system/application, mostly what did in Milestone 2, part 2, but possibly more detailed, as needed. Specifically, it should include the following: User Class and Functional Requirements, Non- Functional Requirements, Operating Requirements, and Design and Implementation Constraints.
+
+\subsection{Technical Design}\label{sec:design}
+($\approx$500 words)\\
+Describe your technical solution. Include high-level drawings and illustrations that can help
+the reader under the system. Provide use-case diagrams, system architecture and data flow diagrams (Figure \ref{fig:simulationfigure} and appropriately discuss them in the text. This is mostly what you did in Milestone 4, but possibly more detailed, as needed.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[height = 2.0in, width=3.0in]{myfigure}
+    \caption{Simulation Results}
+    \label{fig:simulationfigure}
+\end{figure}
+
+\subsection{System Implementation}\label{chap:implementation}
+($\approx$150 words)\\
+In this section, you will provide the details of system implementation, such as programming tools and development environment, libraries. Provide some snapshots of the system/application/GUI.
+
+\subsection{Use of Computer Science Theory and Software Development Fundamentals}\label{chap:theory_sw} 
+($\approx$250 words)\\
+
+In this section, you will discuss the use of computer science theories and software development fundamentals in your project.
+You are required to explicitly state three instances of application of computer science theories and software development fundamentals each and explain where and how exactly you have used it. Examples of computer science theories may include specific data structures or known algorithms that you may have used, computational complexity analysis of any subproblem that you may have solved, during the course of the project, and database design and normalization. Software development fundamentals may include efficient use of design patterns, modular and reusable coding practices, code documentation, unit testing, and integration tools. Please use the following template:
+
+\subsubsection{Use of Computer Science Theories}
+Some text...
+\begin{description}
+    \item [Name of CS theory 1] Describe a specific instance of CS theory 1 here.
+    \item [Name of CS theory 2] Describe a specific instance of CS theory 2 here.
+    \item [Name of CS theory 3] Describe a specific instance of CS theory 3 here.
+\end{description}
+
+\subsubsection{Use of Software Development Fundamentals}
+Some text.
+\begin{description}
+    \item [Name of software development fundamental 1] Describe a specific instance of software development fundamental 1 here.
+    \item [Name of software development fundamental 2] Describe a specific instance of software development fundamental 2 here.
+    \item [Name of software development fundamental 3] Describe a specific instance of software development fundamental 3 here.
+\end{description}
+
+\section{Experimental Design and Testing}\label{chap:results}
+
+\textbf{Length of this section should be 1000-1500 words.}\\
+
+Design meaningful tests that ensure that your system is solving the stakeholder’s problem (validation) and being built correctly (Verification). 
+
+In this section, you must provide the following section in sufficient detail.
+\subsection{Experimental Setup}\label{sec:exp_setup}
+    \begin{itemize}
+        \item State the objectives of experiments – what and why do we want to perform experiments?
+        \item Layout the number of experiments (Experiment \#1, \#2, etc.).
+        \item Describe the experimental setup (machine/system and devices used, lab or real-world environment, etc.) for each experiment.
+    \end{itemize}
+\subsection{Dataset}\label{sec:dataset}
+        Describe the dataset (size of data, how collected: is it publicly available, obtained from an organization, or collected via users (if users, how many users, who were the users - no identity disclosure without written consent)) for each experiment. 
+
+\subsection{Results and Analysis}\label{sec:results}
+    \begin{itemize}
+        \item Present the results and analysis using figures, graphs, and tables (like Table \ref{tab:relatedwork} below), as appropriate for your work, and adequately discuss them in the text.
+
+\begin{table}[h]
+\begin{center}
+\caption{Existing work}\label{tab:relatedwork}
+\begin{tabular}{|l|c|l|l|l|}
+\hline
+Name & Age & Qualification & City & Phone\\
+\hline
+Pradeep & 25 & PhD & Albany & 91023910\\
+XXX  & 25 & PhD & Albany & 91023910\\
+\hline
+\end{tabular}
+\end{center}
+\end{table}
+        \item Justify/argue how your results are better than the existing systems/applications/ studies at least in some aspect(s).
+ \item	Identify the expected, and most importantly “unexpected”, findings from the experiments.
+ \item	Identify the `wow' factor from the experiments (if possible).
+ \item	Failure cases
+    \begin{itemize}
+        \item Describe the anticipated limitations of your system/application.
+        \item Your system/application may not work in all conditions and for all inputs – identify and discuss the conditions or situations when it may fail, and how you plan to validate it.
+    \end{itemize}
+\end{itemize}
+
+
+
+\section{Legal and Ethical Practices}\label{chap:ethics}
+($\approx$300 words)\\
+Discuss the most important ethical and legal considerations that arose, and more importantly, how these were addressed in your project. These can vary dramatically from project to project. This section must include two subsections, as given below.
+\subsection{Legal Considerations}\label{sec:legal}
+\begin{itemize}
+\item Intellectual property concerns regarding the ownership of the underlying technology, as well as potential copyright or trademark concerns.
+\end{itemize}
+
+\subsection{Ethical Considerations}\label{sec:ethical}
+\begin{itemize}
+\item Informed consent regarding data leverage users or testers.
+\item Privacy concerns with your proposed system, including the use of personally identifiable
+data.
+\item Consideration and mitigation of any risks that might arise in the use of your proposed
+system.
+\item Intellectual property concerns regarding the ownership of the underlying technology,
+as well as potential copyright or trademark concerns.
+\end{itemize}
+
+
+\section{Effort Sharing}\label{chap:conclusion}
+($\approx$200 words)\\
+Since it is a team-based project, team members must explicitly state their separate efforts/ contributions in addition to the joint efforts. This section must clearly state how different tasks of the project were divided into  team members, and who did what (as shown in Table \ref{tab:effortsharing}). 
+\begin{table}[h]
+\begin{center}
+\caption{Effort sharing}\label{tab:effortsharing}
+\begin{tabular}{|c|c|c|c|c|c|c|}
+\hline
+Team size & Joint efforts & Member 1 & Member 2 & Member 3 & Member 4 & Member 5\\
+\hline
+5 & J ($\approx$25\%) & I ($\approx$15\%) & I ($\approx$15\%) & I ($\approx$15\%) & I ($\approx$15\%) & I ($\approx$15\%)\\
+4 & J ($\approx$30\%) & I ($\approx$17.5\%) & I ($\approx$17.5\%) & I ($\approx$17.5\%) & I ($\approx$17.5\%) & -\\
+3 & J ($\approx$31\%) & I ($\approx$23\%) & I ($\approx$23\%) & I ($\approx$23\%) & - & -\\
+2 & J ($\approx$40\%) & I ($\approx$30\%) & I ($\approx$30\%) & - & - & -\\
+\hline
+\end{tabular}\\
+J = description of tasks jointly performed\\
+I = description of tasks individually performed
+\end{center}
+\end{table}
+
+
+\section{Conclusion and Future Work}\label{chap:conclusion}
+($\approx$150 words)\\
+State what you conclude from this work and what are the future work possibilities.
+
+
+\textbf{Provide below at least 10-15 references for your work.}
+% Adding a bibliography if citations are used in the report
+\bibliographystyle{plain}
+\bibliography{bibliography.bib}
+% Adds reference to the Bibliography in the ToC
+\addcontentsline{toc}{chapter}{\bibname}
+
+\pagebreak
+
+\chapter*{Appendix A: Resources}
+[\textit{Anything else you would like to provide...}]
+
+
+\end{document}
