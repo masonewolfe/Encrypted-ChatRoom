@@ -10,7 +10,7 @@ export default function Landing() {
         <Container className='pt-3 text-light'>
           <Row className='py-3 text-center'>
             <Col>
-              <a href='/signup'><Button variant='outline-light'>Create an account now</Button></a>
+              <a href='/register'><Button variant='outline-light'>Create an account now</Button></a>
             </Col>
             <Col>
               <a href='/login'><Button variant='outline-light'>Log In</Button></a>
