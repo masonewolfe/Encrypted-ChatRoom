@@ -12,7 +12,7 @@ export default function NavBar(props) {
     const expand = false
     return (
         <>
-            <Navbar key={expand} bg="dark" variant='dark' sticky='top' expand={expand} className='py-3'>
+            <Navbar key={expand} bg="light" variant='light' sticky='top' expand={expand} className='py-3'>
                 <Container fluid>
                     <Navbar.Brand>{props.brand}</Navbar.Brand>
                     <Navbar.Toggle aria-controls={`offcanvasNavbar-expand-${expand}`} />

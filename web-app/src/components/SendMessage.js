@@ -51,7 +51,7 @@ export default function SendMessage() {
   }
   return (
     <>
-      <button className='btn btn-primary' type='button' onClick={() => { send() }}>Send</button>
+      <button className='btn btn-primary' type='button' onClick={() => { send() }}>Message</button>
     </>
   )
 }

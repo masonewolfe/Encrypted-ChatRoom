@@ -6,26 +6,26 @@ export default function Landing() {
   return (
     <>
       <NavBar brand='Welcome to Cipher' />
-      <div className='bg-dark'>
-        <Container className='pt-3 text-light'>
+      <div className=''>
+        <Container className='pt-3'>
           <Row className='py-3 text-center'>
             <Col>
-              <a href='/register'><Button variant='outline-light'>Create an account now</Button></a>
+              <a href='/register'><Button variant='outline-dark'>Create an account now</Button></a>
             </Col>
             <Col>
-              <a href='/login'><Button variant='outline-light'>Log In</Button></a>
+              <a href='/login'><Button variant='outline-dark'>Log In</Button></a>
             </Col>
           </Row>
           <Row className='py-3 text-center'>
             <Col className='col-3'>
-              <img className='img-fluid' alt='Anonymous mask profile' src="https://resume-website-bucket.s3.us-east-2.amazonaws.com/anonymous-mask.png" ></img>
+              <img className='img-fluid' width="250" height="250" alt='locked shield logo' src="https://resume-website-bucket.s3.us-east-2.amazonaws.com/shield-lock.svg" ></img>
             </Col>
             <Col className='col-6 my-auto'><h2>Why choose Cipher?</h2></Col>
             <Col className='col-3'>
-              <img className='img-fluid' alt='Anonymous mask profile' src="https://resume-website-bucket.s3.us-east-2.amazonaws.com/anonymous-mask.png" ></img>
+              <img className='img-fluid' width="250" height="250" alt='locked shield logo' src="https://resume-website-bucket.s3.us-east-2.amazonaws.com/shield-lock.svg" ></img>
             </Col>
           </Row>
-          <Row className='py-5'>
+          <Row className='py-5 border'>
             <Col className='col-8 justify-content-end'>The only two people that can view messages sent on Cipher are the sender and receiver. We use asymmetric encryption of all messages
               meaning when you send a message, it is automatically encrypted using the recipient's public key, and then only they posses the private key to de-<b>Cipher</b> the message.
             </Col>
@@ -36,7 +36,7 @@ export default function Landing() {
               </svg>
             </Col>
           </Row>
-          <Row className='py-5'>
+          <Row className='py-5 border'>
             <Col className='col-4 text-center'>
               <h3>Non-Persitent Messages</h3>
               <svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" fill="currentColor" className="bi bi-trash3" viewBox="0 0 16 16">
@@ -47,7 +47,7 @@ export default function Landing() {
               is it impossible for a spy to read your private message, they would only even have a the smallest window of opportunity. Even if the message is not read
               our system will auto delete the message within 48 hours.</Col>
           </Row>
-          <Row className='py-5'>
+          <Row className='py-5 border'>
             <Col className='col-8'>
               Send messages instantly to anyone, anywhere on the globe. Cipher messaging is the fastest and most convenient full privacy application on the market.
               We pick up the other guy's slack, so you can have the peace of mind that you will always be in touch with those you care about, without any snooping.
@@ -59,7 +59,7 @@ export default function Landing() {
               </svg>
             </Col>
           </Row>
-          <Row className='py-5'>
+          <Row className='py-5 border'>
             <Col className='col-4 text-center'>
               <h3>Now supports groupchats!</h3>
               <svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" fill="currentColor" class="bi bi-people" viewBox="0 0 16 16">

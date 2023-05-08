@@ -29,8 +29,8 @@ export default function LogIn() {
   return (
     <>
       <NavBar brand="Log In" />
-      <div className="bg-dark">
-        <Container className="py-5 text-light text-center">
+      <div className="">
+        <Container className="py-5 text-center">
           {error && <Alert variant="danger">{error}</Alert>}
           <Form onSubmit={handleSubmit}>
             <Form.Group className="my-3 py-5" controlId="formBasicEmail">
@@ -51,7 +51,7 @@ export default function LogIn() {
             <Button
               disabled={loading}
               className="btn btn-lg mb-5"
-              variant="outline-light"
+              variant="outline-dark"
               type="submit"
             >
               Log In
@@ -59,7 +59,7 @@ export default function LogIn() {
           </Form>
           <div className="pt-5 pb-3">Don't have an account with cipher?</div>
           <a href="/register">
-            <Button variant="outline-light">Register here</Button>
+            <Button variant="outline-dark">Register here</Button>
           </a>
           <div className="py-5">
             Break free from the grips of big tech companies, and protect what's
