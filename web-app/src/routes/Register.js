@@ -1,6 +1,6 @@
 import React from "react";
 import NavBar from "../components/NavBar.js";
-import { Button, Col, Container, Form, FormLabel, Row } from "react-bootstrap";
+import { Button, Container, Form } from "react-bootstrap";
 
 export default function Register() {
   async function checkAccount() {
@@ -39,8 +39,8 @@ export default function Register() {
   return (
     <>
       <NavBar brand="Register" />
-      <div className="bg-dark">
-        <Container className="py-5 text-light text-center">
+      <div className="">
+        <Container className="py-5 text-center">
           <Form onSubmit={() => checkAccount()}>
             <Form.Group className="my-3 py-3">
               <Form.Label>
@@ -65,7 +65,7 @@ export default function Register() {
             </Form.Group>
             <Button
               className="btn btn-lg mb-3"
-              variant="outline-light"
+              variant="outline-dark"
               type="submit"
             >
               Create account
@@ -73,7 +73,7 @@ export default function Register() {
           </Form>
           <div className="pt-5 pb-3">Already have an account with cipher?</div>
           <a href="/login">
-            <Button variant="outline-light">Log in here</Button>
+            <Button variant="outline-dark">Log in here</Button>
           </a>
           <div className="py-5">
             Break free from the grips of big tech companies, and protect what's
