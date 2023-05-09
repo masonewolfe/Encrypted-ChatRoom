@@ -49,6 +49,22 @@ export default function SendMessage() {
     ).then(response => response.json()).then(response => console.log(JSON.stringify(response)))
 
   }
+  // function sendWithServer() {
+  //   fetch(
+  //     'http://localhost:4000/send', {
+  //     method: 'POST',
+  //     headers: {
+  //       'Accept': 'application/json',
+  //       'Content-Type': 'application/json'
+  //     },
+  //     body: JSON.stringify({
+
+  //       "to": "joey@cipher.com",
+  //       "message": "message from custom api"
+  //     })
+  //   }
+  //   )
+  // }
   return (
     <>
       <button className='btn btn-primary' type='button' onClick={() => { send() }}>Message</button>
