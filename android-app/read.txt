@@ -1,3 +1,0 @@
-folder for android app development,
-
-smack java project
